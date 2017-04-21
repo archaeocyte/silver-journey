@@ -1,0 +1,6 @@
+module.exports = {
+	SUCCESS: 0,
+
+	USER_NOT_FOUND: 1001,
+	WRONG_PASSWORD: 1002
+}
