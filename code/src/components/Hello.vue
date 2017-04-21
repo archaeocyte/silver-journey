@@ -21,12 +21,20 @@
 </template>
 
 <script>
+
+import utils from "../utils";
+var getPassword = utils.getPassword;
+
+
 export default {
   name: 'hello',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  created() {
+    console.log(getPassword("admin@qq.com", "admin"));
   }
 }
 </script>
