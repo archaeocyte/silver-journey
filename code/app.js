@@ -1,7 +1,7 @@
 var express = require('express')
 
 var route = require("./routes")();
-var middlewares = require("./middlewares")();
+var middlewares = require("./middlewares");
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
@@ -38,7 +38,7 @@ app.use(session({
 	saveUninitialized: false
 }));
 
-app.use(middlewares);
+app.use(middlewares.auth());
 
 app.use(route);
 
