@@ -38,7 +38,11 @@ app.use(session({
 	saveUninitialized: false
 }));
 
-app.use(middlewares.auth());
+var auth_ignore = [
+	"/user/login"
+];
+
+app.use("/api", middlewares.auth(auth_ignore));
 
 app.use(route);
 
