@@ -23,7 +23,8 @@ create table user
    sex                  int default 0,    /*0:男 1:女*/
    type                 int default 0,    /*0:普通用户*/
    create_time          timestamp not null default CURRENT_TIMESTAMP,
-   primary key (id)
+   primary key (id),
+   UNIQUE(username)
 ) character set = utf8mb4;
 
 /*==============================================================*/
