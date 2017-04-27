@@ -211,6 +211,10 @@ insert into user (username, password, email, sex, type)
             values('吴傲天', '123', 'wat@1.com', 1, 0);
 insert into user (username, password)
             values('mgz', '123');
+
+insert into user (username, password, type)
+            values('admin', '2fdd9ad651d6451150cdfcb2493ccf8e636a9e5c', 99);
+
 -- 演员
 insert into actor (name, picture, description)
             values('范·迪塞尔', 'pic/fan.png', 'good');
