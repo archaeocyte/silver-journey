@@ -27,27 +27,36 @@ exports.cosAPI = cosAPI;
 
 
 if (!module.parent) {
-	cosAPI.getService({}, function(err, data) {
-		console.log(JSON.stringify(data));
+
+
+	var basePath = "../../db_src";
+
+	function checkToUpload(filesList) {
+		var item = filesList.shift();
+		if (item) {
+			var ContentLength = item.size,
+				Body = item.path,
+				Key = item.path.replace(`${basePath}/`, ""),
+				Bucket = "silverjourney",
+				Region = "cn-south";
+			cosAPI.putObject({
+				ContentLength: ContentLength,
+				Body: Body,
+				Bucket: Bucket,
+				Region: Region,
+				Key: Key
+			}, function() {
+				console.log(arguments);
+				checkToUpload(filesList);
+			});
+		}
+	}
+
+
+	var traversalDir = require("../common").traversalDir;
+	traversalDir(basePath, function(err, filesList) {
+		console.log(filesList);
+		checkToUpload(filesList);
 	});
 
-	var path = require('path'),
-		fs = require('fs');
-
-	var basePath = path.join(__dirname, "../../db_src/picture/actor/1.jpg"),
-		state = fs.statSync(basePath),
-		length = state.size;
-
-	fs.readFile(basePath, function(err, data) {
-		console.log(data.length, length, basePath);
-		cosAPI.putObject({
-			ContentLength: length,
-			Body: basePath,
-			Bucket: "silverjourney",
-			Region: "cn-south",
-			Key: "test.jpg"
-		}, function() {
-			console.log(arguments);
-		});
-	});
 }
