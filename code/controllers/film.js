@@ -44,15 +44,14 @@ exports.list = function list(req, res, next) {
 				film_dao.getFilmActorById(film.id, ep.done(`${film.id}_get_film_actor`));
 				film_dao.getFilmDirectorById(film.id, ep.done(`${film.id}_get_film_director`));
 			});
-
-			async.parallelLimit(allTask, 10, function(err, films) {
-				return res.send({
-					code: error_code.SUCCESS,
-					data: {
-						films: films
-					},
-					msg: "SUCCESS"
-				});
+		});
+		async.parallelLimit(allTask, 10, function(err, films) {
+			return res.send({
+				code: error_code.SUCCESS,
+				data: {
+					films: films
+				},
+				msg: "SUCCESS"
 			});
 		});
 	});
