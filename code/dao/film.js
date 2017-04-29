@@ -39,6 +39,20 @@ module.exports = {
 			sql += ` where id = ${id}`;
 		}
 		connection.query(sql, [], callback);
+	},
+	getFilmPosterById: function(id, callback) {
+		var sql = `
+			select * from film_pic_poster
+			where film_id = ${id}
+		`;
+		connection.query(sql, [], callback);
+	},
+	getFilmStillById: function(id, callback) {
+		var sql = `
+			select * from film_pic_still
+			where film_id = ${id}
+		`;
+		connection.query(sql, [], callback);
 	}
 };
 

@@ -28,14 +28,34 @@ exports.list = function list(req, res, next) {
 				ep.all([
 					`${film.id}_get_film_actor`,
 					`${film.id}_get_film_director`,
-				], function(film_actors, film_directors) {
+					`${film.id}_get_film_poster`,
+					`${film.id}_get_film_still`
+				], function(
+					film_actors,
+					film_directors,
+					film_posters,
+					film_stills
+				) {
 
 					film.actors = [];
+					film.posters = [];
+					film.stills = [];
 					_.forEach(film_actors, function(item) {
 						var actor = actor_map[item.actor_id];
 						actor.role_name = item.role_name;
 						film.actors.push(actor);
 					});
+
+					_.forEach(film_posters, function(item) {
+						film.posters.push(item.url);
+					});
+
+					_.forEach(film_stills, function(item) {
+						film.stills.push(item.url);
+					});
+
+					film.types = JSON.parse(film.type);
+					delete film.type;
 
 					film.director = director_map[film_directors[0].director_id];
 					task_callback(null, film);
@@ -43,6 +63,8 @@ exports.list = function list(req, res, next) {
 
 				film_dao.getFilmActorById(film.id, ep.done(`${film.id}_get_film_actor`));
 				film_dao.getFilmDirectorById(film.id, ep.done(`${film.id}_get_film_director`));
+				film_dao.getFilmPosterById(film.id, ep.done(`${film.id}_get_film_poster`));
+				film_dao.getFilmStillById(film.id, ep.done(`${film.id}_get_film_still`));
 			});
 		});
 		async.parallelLimit(allTask, 10, function(err, films) {
