@@ -52,6 +52,27 @@ create table director
    primary key (id)
 ) character set = utf8mb4;
 
+
+/*==============================================================*/
+/* 语言表                                                        */
+/*==============================================================*/
+create table language
+(
+   id                   bigint not null auto_increment,
+   name                 varchar(20) not null,
+   primary key (id)
+) character set = utf8mb4;
+
+/*==============================================================*/
+/* 类型表                                                        */
+/*==============================================================*/
+create table type
+(
+   id                   bigint not null auto_increment,
+   name                 varchar(20) not null,
+   primary key (id)
+) character set = utf8mb4;
+
 /*==============================================================*/
 /* 电影表                                                        */
 /*==============================================================*/
@@ -60,12 +81,10 @@ create table film
    id                   bigint not null auto_increment,
    name_cn              varchar(100) default null,       /*中文名*/
    name_en              varchar(100) default null,       /*英文名*/
-   types                varchar(200) default null,       /*类型(动作、科幻等)列表，json格式*/
    duration             int default null,                /*时长，分钟数*/
    slogan               varchar(100) default null,       /*一句话简介*/
    description          varchar(3000) default null,      /*剧情介绍*/
    country              varchar(20) default null,        /*来源国家*/
-   language             varchar(100) default null,       /*语言列表，json格式*/
    on_date              timestamp not null default CURRENT_TIMESTAMP, /*上映时间*/
    primary key (id)
 ) character set = utf8mb4;
@@ -83,6 +102,32 @@ create table cinema
    telephone            varchar(20) default null,
    service              varchar(100)  default null,   /*提供的服务(退票，3D眼镜)列表*/
    primary key (id)
+) character set = utf8mb4;
+
+/*==============================================================*/
+/* 电影语言关系表                                                 */
+/*==============================================================*/
+create table film_language
+(
+    id                  bigint not null auto_increment,
+    film_id             bigint not null,
+    language_id         bigint not null,
+    primary key(id),
+    constraint FK_film_id foreign key (film_id) references film(id),
+    constraint FK_language_id foreign key (language_id) references language(id)
+) character set = utf8mb4;
+
+/*==============================================================*/
+/* 电影类型关系表                                                 */
+/*==============================================================*/
+create table film_type
+(
+    id                  bigint not null auto_increment,
+    film_id             bigint not null,
+    type_id             bigint not null,
+    primary key(id),
+    constraint FK_film_id foreign key (film_id) references film(id),
+    constraint FK_type_id foreign key (type_id) references type(id)
 ) character set = utf8mb4;
 
 /*==============================================================*/
