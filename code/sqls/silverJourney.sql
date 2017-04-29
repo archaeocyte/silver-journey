@@ -257,10 +257,11 @@ create table session
    end_time             time default null,                  /*场次结束时间*/
    video_hall_name      varchar(20) default null,           /*放映厅名*/
    price                int default null,                   /*单位是分，如32.8元，则存为3280*/
-   version_lang         varchar(20) default null,           /*语言(中文、英文等)*/
+   language_id          bigint not null,
    version_view         varchar(20) default null,           /*2D或3D*/
    primary key (id),
-   constraint FK_cinema_film_rlt_id foreign key (cinema_film_rlt_id) references cinema_film_rlt(id)
+   constraint FK_cinema_film_rlt_id foreign key (cinema_film_rlt_id) references cinema_film_rlt(id),
+   constraint FK_language_id foreign key (language_id) references language(id)
 ) character set = utf8mb4;
 
 /*==============================================================*/
