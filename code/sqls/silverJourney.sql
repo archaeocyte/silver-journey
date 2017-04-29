@@ -64,16 +64,6 @@ create table language
 ) character set = utf8mb4;
 
 /*==============================================================*/
-/* 类型表                                                        */
-/*==============================================================*/
-create table type
-(
-   id                   bigint not null auto_increment,
-   name                 varchar(20) not null,
-   primary key (id)
-) character set = utf8mb4;
-
-/*==============================================================*/
 /* 电影表                                                        */
 /*==============================================================*/
 create table film
@@ -86,6 +76,7 @@ create table film
    description          varchar(3000) default null,      /*剧情介绍*/
    country              varchar(20) default null,        /*来源国家*/
    on_date              timestamp not null default CURRENT_TIMESTAMP, /*上映时间*/
+   type                 varchar(3000) default null,     /*电影类型*/
    primary key (id)
 ) character set = utf8mb4;
 
@@ -100,7 +91,7 @@ create table cinema
    address              varchar(500) default null,    /*用于显示的地址*/
    location             varchar(500) default null,    /*用于定位的位置信息*/
    telephone            varchar(20) default null,
-   service              varchar(100)  default null,   /*提供的服务(退票，3D眼镜)列表*/
+   service              varchar(100) default null,   /*提供的服务(退票，3D眼镜)列表*/
    primary key (id)
 ) character set = utf8mb4;
 
@@ -113,22 +104,10 @@ create table film_language
     film_id             bigint not null,
     language_id         bigint not null,
     primary key(id),
-    constraint FK_film_id foreign key (film_id) references film(id),
+    constraint FK_film_id_language foreign key (film_id) references film(id),
     constraint FK_language_id foreign key (language_id) references language(id)
 ) character set = utf8mb4;
 
-/*==============================================================*/
-/* 电影类型关系表                                                 */
-/*==============================================================*/
-create table film_type
-(
-    id                  bigint not null auto_increment,
-    film_id             bigint not null,
-    type_id             bigint not null,
-    primary key(id),
-    constraint FK_film_id foreign key (film_id) references film(id),
-    constraint FK_type_id foreign key (type_id) references type(id)
-) character set = utf8mb4;
 
 /*==============================================================*/
 /* 电影演员关系表                                                 */
@@ -140,7 +119,7 @@ create table film_actor
     actor_id            bigint not null,
     role_name           varchar(100) default null,
     primary key(id),
-    constraint FK_film_id foreign key (film_id) references film(id),
+    constraint FK_film_id_actor foreign key (film_id) references film(id),
     constraint FK_actor_id foreign key (actor_id) references actor(id)
 ) character set = utf8mb4;
 
@@ -154,7 +133,7 @@ create table film_director
     director_id         bigint not null,
     role_name           varchar(100) default null,
     primary key(id),
-    constraint FK_film_id foreign key (film_id) references film(id),
+    constraint FK_film_id_director foreign key (film_id) references film(id),
     constraint FK_director_id foreign key (director_id) references director(id)
 ) character set = utf8mb4;
 
@@ -166,7 +145,7 @@ create table film_picture
 (
    id                   bigint not null auto_increment,
    film_id              bigint not null,
-   posters              varchar(200) default null,    /*海报url列表，json格式*/
+   posters              varchar(3000) default null,    /*海报url列表，json格式*/
    hd_still             varchar(200) default null,    /*高清剧照url*/
    stills               varchar(3000) default null,   /*剧照url列表，json格式*/
    primary key (id),
@@ -261,7 +240,7 @@ create table session
    version_view         varchar(20) default null,           /*2D或3D*/
    primary key (id),
    constraint FK_cinema_film_rlt_id foreign key (cinema_film_rlt_id) references cinema_film_rlt(id),
-   constraint FK_language_id foreign key (language_id) references language(id)
+   constraint FK_language_id_session foreign key (language_id) references language(id)
 ) character set = utf8mb4;
 
 /*==============================================================*/
