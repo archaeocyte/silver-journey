@@ -34,7 +34,6 @@ module.exports = {
 	getDirector: function(id, callback) {
 		var sql = `
 			select * from director
-			where id = ${id}
 		`;
 		if (id || id == 0) {
 			sql += ` where id = ${id}`;

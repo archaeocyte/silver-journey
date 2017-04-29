@@ -28,7 +28,7 @@ exports.list = function list(req, res, next) {
 				ep.all([
 					`${film.id}_get_film_actor`,
 					`${film.id}_get_film_director`,
-				], function(film_actors, film_director) {
+				], function(film_actors, film_directors) {
 
 					film.actors = [];
 					_.forEach(film_actors, function(item) {
@@ -37,12 +37,12 @@ exports.list = function list(req, res, next) {
 						film.actors.push(actor);
 					});
 
-					film.director = directors[film_director.director_id];
+					film.director = director_map[film_directors[0].director_id];
 					task_callback(null, film);
 				});
 
 				film_dao.getFilmActorById(film.id, ep.done(`${film.id}_get_film_actor`));
-				film_dao.getFilmActorById(film.id, ep.done(`${film.id}_get_film_director`));
+				film_dao.getFilmDirectorById(film.id, ep.done(`${film.id}_get_film_director`));
 			});
 
 			async.parallelLimit(allTask, 10, function(err, films) {
