@@ -64,7 +64,6 @@ create table film
    duration             int default null,                /*时长，分钟数*/
    slogan               varchar(100) default null,       /*一句话简介*/
    description          varchar(3000) default null,      /*剧情介绍*/
-   score                float default 5.0,
    country              varchar(20) default null,        /*来源国家*/
    language             varchar(100) default null,       /*语言列表，json格式*/
    on_date              timestamp not null default CURRENT_TIMESTAMP, /*上映时间*/
@@ -82,7 +81,6 @@ create table cinema
    address              varchar(500) default null,    /*用于显示的地址*/
    location             varchar(500) default null,    /*用于定位的位置信息*/
    telephone            varchar(20) default null,
-   score                float default 5.0,
    service              varchar(100)  default null,   /*提供的服务(退票，3D眼镜)列表*/
    primary key (id)
 ) character set = utf8mb4;
