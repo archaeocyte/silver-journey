@@ -39,7 +39,8 @@ app.use(session({
 }));
 
 var auth_ignore = [
-	"/user/login"
+	"/user/login",
+	"/film/list",
 ];
 
 app.use("/api", middlewares.auth(auth_ignore));
@@ -51,7 +52,13 @@ app.use(require('connect-history-api-fallback')());
 
 app.use(express.static('dist'));
 
-
+app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.send({
+        msg: err.message,
+        error: {}
+    });
+});
 
 app.listen(port, function(err) {
     if (err) {
