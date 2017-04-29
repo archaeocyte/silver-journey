@@ -62,6 +62,21 @@ create table film
 ) character set = utf8mb4;
 
 /*==============================================================*/
+/* 电影演员表                                                     */
+/*==============================================================*/
+create table film_actor
+(
+    id                  bigint not null auto_increment,
+    film_id             bigint not null,
+    actor_id            bigint not null,
+    rolename            varchar(100) default null,
+    primary key(id),
+    constraint FK_film_id foreign key (film_id) references film(id),
+    constraint FK_actor_id foreign key (actor_id) references actor(id)
+) character set = utf8mb4;
+
+
+/*==============================================================*/
 /* 电影图片表                                                     */
 /*==============================================================*/
 create table picture
