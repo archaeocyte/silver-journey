@@ -41,6 +41,18 @@ create table actor
 
 
 /*==============================================================*/
+/* 导演表                                                        */
+/*==============================================================*/
+create table director
+(
+   id                   bigint not null auto_increment,
+   name                 varchar(20) not null,
+   picture              varchar(200) default null,
+   description          varchar(1000) default null,
+   primary key (id)
+) character set = utf8mb4;
+
+/*==============================================================*/
 /* 电影表                                                        */
 /*==============================================================*/
 create table film
@@ -48,7 +60,7 @@ create table film
    id                   bigint not null auto_increment,
    name_cn              varchar(100) default null,       /*中文名*/
    name_en              varchar(100) default null,       /*英文名*/
-   director             varchar(20) default null,
+   director_id          bigint not null,
    actors               varchar(5000) default null,      /*演员列表，json格式*/
    types                varchar(200) default null,       /*类型(动作、科幻等)列表，json格式*/
    duration             int default null,                /*时长，分钟数*/
@@ -69,7 +81,7 @@ create table film_actor
     id                  bigint not null auto_increment,
     film_id             bigint not null,
     actor_id            bigint not null,
-    rolename            varchar(100) default null,
+    role_name           varchar(100) default null,
     primary key(id),
     constraint FK_film_id foreign key (film_id) references film(id),
     constraint FK_actor_id foreign key (actor_id) references actor(id)
