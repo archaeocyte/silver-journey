@@ -4,12 +4,18 @@ drop table if exists film_comment;
 drop table if exists cinema_comment;
 drop table if exists cinema_film_rlt;
 drop table if exists cinema;
-drop table if exists soundtrack;
-drop table if exists preview;
-drop table if exists picture;
+drop table if exists film_soundtrack;
+drop table if exists film_preview;
+drop table if exists film_picture;
+drop table if exists film_language;
+drop table if exists film_actor;
+drop table if exists film_director;
 drop table if exists film;
 drop table if exists actor;
+drop table if exists director;
 drop table if exists user;
+drop table if exists language;
+
 
 /*==============================================================*/
 /* 用户表                                                        */
@@ -291,25 +297,26 @@ insert into actor (name)
 
 insert into director (name, picture, description)
     values ("刘镇伟", "picture/director/liuzhenwei.jpg", "刘镇伟，1952年8月2日出生于香港长洲岛。香港导演、编剧。");
-
+insert into director (name, picture, description)
+    values ("F·加里·格雷", "picture/director/Fjialigelei.jpg", "F·加里·格雷，出生于1969年7月17日。非洲裔美国电影导演、监制和MV导演。");
 
 -- 电影
-insert into film (name_cn, name_en, director, actors, types, duration, slogan, description, score, country, language, on_date)
-            values('速度与激情8', 'The Fate of the Furious', 'F·加里·格雷', 
-               '[{"id": "1","rolename": "多米尼克·托莱多"},{"id": "2","name": "卢克·霍布斯"}]',
-               '["动作", "剧情","惊悚","犯罪"]', 120, "硬汉豪车再纵横，依旧燃爆荷尔蒙",
-               '该片讲述了神秘冷艳的黑科技高手赛弗的出现，导致多米尼克心里叛变，直接使整个飞车家族陷入危险境地的故事。', 
-               '9.1', '法国', '["英语","国语"]', "2017-04-14");
-insert into film (name_cn, name_en, director, actors, types, duration, slogan, description, score, country, language, on_date)
-            values('大话西游之大圣娶亲', 'A Chinese Odyssey Part Two - Cinderella', '刘镇伟', 
-               '[{"id": "3","rolename": "至尊宝"},{"id": "4","name": "紫霞仙子"}]',
-               '["动作", "剧情","惊悚","犯罪"]', 120, "从一世到一生，大圣提前娶妻",
-               '至尊宝被月光宝盒带回到五百年前，遇见紫霞仙子，被对方打上烙印成为对方的人，并发觉自己已变成孙悟空。
-               紫霞与青霞本是如来佛祖座前日月神灯的灯芯（白天是紫霞，晚上是青霞），二人虽然同一肉身却仇恨颇深，
-               因此紫霞立下誓言，谁能拔出她手中的紫青宝剑，谁就是她的意中人。紫青宝剑被至尊宝于不经意间拔出，
-               紫霞决定以身相许，却遭一心记挂白晶晶的至尊宝拒绝。后牛魔王救下迷失在沙漠中的紫霞，并逼紫霞与他成婚，
-               关键时刻，至尊宝现身。', 
-               '9.0', '中国香港', '["国语","粤语"]', "2017-04-13");
+-- insert into film (name_cn, name_en, director, actors, types, duration, slogan, description, score, country, language, on_date)
+--             values('速度与激情8', 'The Fate of the Furious', 'F·加里·格雷', 
+--                '[{"id": "1","rolename": "多米尼克·托莱多"},{"id": "2","name": "卢克·霍布斯"}]',
+--                '["动作", "剧情","惊悚","犯罪"]', 120, "硬汉豪车再纵横，依旧燃爆荷尔蒙",
+--                '该片讲述了神秘冷艳的黑科技高手赛弗的出现，导致多米尼克心里叛变，直接使整个飞车家族陷入危险境地的故事。', 
+--                '9.1', '法国', '["英语","国语"]', "2017-04-14");
+-- insert into film (name_cn, name_en, director, actors, types, duration, slogan, description, score, country, language, on_date)
+--             values('大话西游之大圣娶亲', 'A Chinese Odyssey Part Two - Cinderella', '刘镇伟', 
+--                '[{"id": "3","rolename": "至尊宝"},{"id": "4","name": "紫霞仙子"}]',
+--                '["动作", "剧情","惊悚","犯罪"]', 120, "从一世到一生，大圣提前娶妻",
+--                '至尊宝被月光宝盒带回到五百年前，遇见紫霞仙子，被对方打上烙印成为对方的人，并发觉自己已变成孙悟空。
+--                紫霞与青霞本是如来佛祖座前日月神灯的灯芯（白天是紫霞，晚上是青霞），二人虽然同一肉身却仇恨颇深，
+--                因此紫霞立下誓言，谁能拔出她手中的紫青宝剑，谁就是她的意中人。紫青宝剑被至尊宝于不经意间拔出，
+--                紫霞决定以身相许，却遭一心记挂白晶晶的至尊宝拒绝。后牛魔王救下迷失在沙漠中的紫霞，并逼紫霞与他成婚，
+--                关键时刻，至尊宝现身。', 
+--                '9.0', '中国香港', '["国语","粤语"]', "2017-04-13");
 insert into film (name_cn, name_en, duration, slogan, description, country, on_date, type)
     values (
             '大话西游之大圣娶亲',
@@ -325,31 +332,45 @@ insert into film (name_cn, name_en, duration, slogan, description, country, on_d
             '2017-04-13',
             '["动作", "剧情"]'
             );
+insert into film (name_cn, name_en, duration, slogan, description, country, on_date, type)
+    values (
+            '速度与激情8',
+            'The Fate of the Furious',
+            120,
+            '硬汉豪车再纵横，依旧燃爆荷尔蒙',
+            '该片讲述了神秘冷艳的黑科技高手赛弗的出现，导致多米尼克心里叛变，直接使整个飞车家族陷入危险境地的故事。',
+            '法国',
+            '2017-04-14',
+            '["英语","国语"]'
+            );
 
 -- 电影导演关系
 
 insert into film_director (film_id, director_id)
     values (1, 1);
+insert into film_director (film_id, director_id)
+    values (2, 2);
 
 -- 电影演员关系
 
 insert into film_actor (film_id, actor_id, role_name)
     values (1, 3, "至尊宝");
-
 insert into film_actor (film_id, actor_id, role_name)
     values (1, 4, "紫霞仙子");
-
 insert into film_actor (film_id, actor_id, role_name)
-    values (1, 4, "青霞仙子");
+    values (2, 1, "多米尼克·托莱多");
+insert into film_actor (film_id, actor_id, role_name)
+    values (2, 2, "卢克·霍布斯");
+
 
 -- 电影图片（海报 高清剧照 剧照列表）
-insert into picture (film_id, posters, hd_still, stills)
+insert into film_picture (film_id, posters, hd_still, stills)
             values('1', 'pic/1.png', 'pic/2.png', '["pic/3.png", "pic/4.png"]');
 -- 预告片
-insert into preview (film_id, url)
+insert into film_preview (film_id, url)
             values('1', 'someurl');
 -- 电影原声
-insert into soundtrack (film_id, url)
+insert into film_soundtrack (film_id, url)
             values('1', 'someurl');
 -- 电影院
 insert into cinema (name, picture, address, location, telephone, score, service)
