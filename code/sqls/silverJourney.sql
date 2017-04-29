@@ -131,7 +131,6 @@ create table film_director
     id                  bigint not null auto_increment,
     film_id             bigint not null,
     director_id         bigint not null,
-    role_name           varchar(100) default null,
     primary key(id),
     constraint FK_film_id_director foreign key (film_id) references film(id),
     constraint FK_director_id foreign key (director_id) references director(id)
@@ -286,7 +285,14 @@ insert into actor (name)
 insert into actor (name)
             values('周星驰');
 insert into actor (name)
-            values('朱茵');          
+            values('朱茵');
+
+-- 导演
+
+insert into director (name, picture, description)
+    values ("刘镇伟", "picture/director/liuzhenwei.jpg", "刘镇伟，1952年8月2日出生于香港长洲岛。香港导演、编剧。");
+
+
 -- 电影
 insert into film (name_cn, name_en, director, actors, types, duration, slogan, description, score, country, language, on_date)
             values('速度与激情8', 'The Fate of the Furious', 'F·加里·格雷', 
@@ -304,6 +310,38 @@ insert into film (name_cn, name_en, director, actors, types, duration, slogan, d
                紫霞决定以身相许，却遭一心记挂白晶晶的至尊宝拒绝。后牛魔王救下迷失在沙漠中的紫霞，并逼紫霞与他成婚，
                关键时刻，至尊宝现身。', 
                '9.0', '中国香港', '["国语","粤语"]', "2017-04-13");
+insert into film (name_cn, name_en, duration, slogan, description, country, on_date, type)
+    values (
+            '大话西游之大圣娶亲',
+            'A Chinese Odyssey Part Two - Cinderella',
+            120,
+            '从一世到一生，大圣提前娶妻',
+            '至尊宝被月光宝盒带回到五百年前，遇见紫霞仙子，被对方打上烙印成为对方的人，并发觉自己已变成孙悟空。
+            紫霞与青霞本是如来佛祖座前日月神灯的灯芯（白天是紫霞，晚上是青霞），二人虽然同一肉身却仇恨颇深，
+            因此紫霞立下誓言，谁能拔出她手中的紫青宝剑，谁就是她的意中人。紫青宝剑被至尊宝于不经意间拔出，
+            紫霞决定以身相许，却遭一心记挂白晶晶的至尊宝拒绝。后牛魔王救下迷失在沙漠中的紫霞，并逼紫霞与他成婚，
+            关键时刻，至尊宝现身。',
+            '中国香港',
+            '2017-04-13',
+            '["动作", "剧情"]'
+            );
+
+-- 电影导演关系
+
+insert into film_director (film_id, director_id)
+    values (1, 1);
+
+-- 电影演员关系
+
+insert into film_actor (film_id, actor_id, role_name)
+    values (1, 3, "至尊宝");
+
+insert into film_actor (film_id, actor_id, role_name)
+    values (1, 4, "紫霞仙子");
+
+insert into film_actor (film_id, actor_id, role_name)
+    values (1, 4, "青霞仙子");
+
 -- 电影图片（海报 高清剧照 剧照列表）
 insert into picture (film_id, posters, hd_still, stills)
             values('1', 'pic/1.png', 'pic/2.png', '["pic/3.png", "pic/4.png"]');
