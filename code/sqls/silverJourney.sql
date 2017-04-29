@@ -212,7 +212,6 @@ create table session
    session_date         timestamp not null default CURRENT_TIMESTAMP,   /*场次日期*/
    start_time           time default null,                  /*场次开始时间*/
    end_time             time default null,                  /*场次结束时间*/
-   occupied_seats       varchar(3000) default null,         /*已选座位*/
    video_hall_name      varchar(20) default null,           /*放映厅名*/
    price                int default null,                   /*单位是分，如32.8元，则存为3280*/
    version_lang         varchar(20) default null,           /*语言(中文、英文等)*/
