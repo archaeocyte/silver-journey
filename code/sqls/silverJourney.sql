@@ -6,7 +6,8 @@ drop table if exists cinema_film_rlt;
 drop table if exists cinema;
 drop table if exists film_soundtrack;
 drop table if exists film_preview;
-drop table if exists film_picture;
+drop table if exists film_pic_poster;
+drop table if exists film_pic_still;
 drop table if exists film_language;
 drop table if exists film_actor;
 drop table if exists film_director;
@@ -83,6 +84,7 @@ create table film
    country              varchar(20) default null,        /*来源国家*/
    on_date              timestamp not null default CURRENT_TIMESTAMP, /*上映时间*/
    type                 varchar(3000) default null,     /*电影类型*/
+   hd_still             varchar(200) default null,      /*高清剧照url*/
    primary key (id)
 ) character set = utf8mb4;
 
@@ -143,18 +145,29 @@ create table film_director
 ) character set = utf8mb4;
 
 
+
 /*==============================================================*/
-/* 电影图片表                                                     */
+/* 电影海报表                                                     */
 /*==============================================================*/
-create table film_picture
+create table film_pic_poster
 (
    id                   bigint not null auto_increment,
    film_id              bigint not null,
-   posters              varchar(3000) default null,    /*海报url列表，json格式*/
-   hd_still             varchar(200) default null,    /*高清剧照url*/
-   stills               varchar(3000) default null,   /*剧照url列表，json格式*/
+   url                  varchar(200) default null,
    primary key (id),
-   constraint FK_film_id_pic foreign key (film_id) references film(id)
+   constraint FK_film_id_pic_poster foreign key (film_id) references film(id)
+) character set = utf8mb4;
+
+/*==============================================================*/
+/* 电影剧照表                                                     */
+/*==============================================================*/
+create table film_pic_still
+(
+   id                   bigint not null auto_increment,
+   film_id              bigint not null,
+   url                  varchar(200) default null,
+   primary key (id),
+   constraint FK_film_id_pic_still foreign key (film_id) references film(id)
 ) character set = utf8mb4;
 
 /*==============================================================*/
@@ -317,7 +330,7 @@ insert into director (name, picture, description)
 --                紫霞决定以身相许，却遭一心记挂白晶晶的至尊宝拒绝。后牛魔王救下迷失在沙漠中的紫霞，并逼紫霞与他成婚，
 --                关键时刻，至尊宝现身。', 
 --                '9.0', '中国香港', '["国语","粤语"]', "2017-04-13");
-insert into film (name_cn, name_en, duration, slogan, description, country, on_date, type)
+insert into film (name_cn, name_en, duration, slogan, description, country, on_date, type, hd_still)
     values (
             '大话西游之大圣娶亲',
             'A Chinese Odyssey Part Two - Cinderella',
@@ -330,9 +343,10 @@ insert into film (name_cn, name_en, duration, slogan, description, country, on_d
             关键时刻，至尊宝现身。',
             '中国香港',
             '2017-04-13',
-            '["动作", "剧情"]'
+            '["动作", "剧情"]',
+            'picture/hd_still/aChineseOdysseyPartTwo.jpg'
             );
-insert into film (name_cn, name_en, duration, slogan, description, country, on_date, type)
+insert into film (name_cn, name_en, duration, slogan, description, country, on_date, type, hd_still)
     values (
             '速度与激情8',
             'The Fate of the Furious',
@@ -341,7 +355,8 @@ insert into film (name_cn, name_en, duration, slogan, description, country, on_d
             '该片讲述了神秘冷艳的黑科技高手赛弗的出现，导致多米尼克心里叛变，直接使整个飞车家族陷入危险境地的故事。',
             '法国',
             '2017-04-14',
-            '["英语","国语"]'
+            '["英语","国语"]',
+            'picture/hd_still/theFateoftheFurious.jpg'
             );
 
 -- 电影导演关系
@@ -364,21 +379,30 @@ insert into film_actor (film_id, actor_id, role_name)
 
 
 -- 电影图片（海报 高清剧照 剧照列表）
-insert into film_picture (film_id, posters, hd_still, stills)
-            values(
-                  '1', 
-                  '["picture/poster/aChineseOdysseyPartTwo1.jpg", "picture/poster/aChineseOdysseyPartTwo2.jpg"]', 
-                  'picture/hd_still/aChineseOdysseyPartTwo.jpg', 
-                  '["picture/still/aChineseOdysseyPartTwo1.jpg", "picture/still/aChineseOdysseyPartTwo1.jpg"]'
-                  );
+insert into film_pic_poster (film_id, url)
+    values (1, 'picture/poster/aChineseOdysseyPartTwo1.jpg');
 
-insert into film_picture (film_id, posters, hd_still, stills)
-            values(
-                  '2', 
-                  '["picture/poster/theFateoftheFurious1.jpg", "picture/poster/theFateoftheFurious2.jpg"]', 
-                  'picture/hd_still/theFateoftheFurious.jpg', 
-                  '["picture/still/theFateoftheFurious1.jpg", "picture/still/theFateoftheFurious2.jpg"]'
-                  );
+insert into film_pic_poster (film_id, url)
+    values (1, 'picture/poster/aChineseOdysseyPartTwo2.jpg');
+
+insert into film_pic_poster (film_id, url)
+    values (2, 'picture/poster/theFateoftheFurious1.jpg');
+
+insert into film_pic_poster (film_id, url)
+    values (2, 'picture/poster/theFateoftheFurious2.jpg');
+
+insert into film_pic_still (film_id, url)
+    values (1, 'picture/still/aChineseOdysseyPartTwo1.jpg');
+
+insert into film_pic_still (film_id, url)
+    values (1, 'picture/still/aChineseOdysseyPartTwo2.jpg');
+
+insert into film_pic_still (film_id, url)
+    values (2, 'picture/still/theFateoftheFurious1.jpg');
+
+insert into film_pic_still (film_id, url)
+    values (2, 'picture/still/theFateoftheFurious2.jpg');
+
 -- 预告片
 insert into film_preview (film_id, url)
             values('1', 'someurl');
