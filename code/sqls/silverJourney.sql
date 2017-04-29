@@ -72,6 +72,22 @@ create table film
 ) character set = utf8mb4;
 
 /*==============================================================*/
+/* 电影院表                                                       */
+/*==============================================================*/
+create table cinema
+(
+   id                   bigint not null auto_increment,
+   name                 varchar(50) default null,
+   picture              varchar(200) default null,
+   address              varchar(500) default null,    /*用于显示的地址*/
+   location             varchar(500) default null,    /*用于定位的位置信息*/
+   telephone            varchar(20) default null,
+   score                float default 5.0,
+   service              varchar(100)  default null,   /*提供的服务(退票，3D眼镜)列表*/
+   primary key (id)
+) character set = utf8mb4;
+
+/*==============================================================*/
 /* 电影演员关系表                                                 */
 /*==============================================================*/
 create table film_actor
@@ -103,7 +119,7 @@ create table film_director
 /*==============================================================*/
 /* 电影图片表                                                     */
 /*==============================================================*/
-create table picture
+create table film_picture
 (
    id                   bigint not null auto_increment,
    film_id              bigint not null,
@@ -117,7 +133,7 @@ create table picture
 /*==============================================================*/
 /* 电影预告片表                                                   */
 /*==============================================================*/
-create table preview
+create table film_preview
 (
    id                   bigint not null auto_increment,
    film_id              bigint not null,
@@ -129,7 +145,7 @@ create table preview
 /*==============================================================*/
 /* 电影原声表                                                     */
 /*==============================================================*/
-create table soundtrack
+create table film_soundtrack
 (
    id                   bigint not null auto_increment,
    film_id              bigint not null,              
@@ -138,21 +154,6 @@ create table soundtrack
    constraint FK_film_id_sdtk foreign key (film_id) references film(id)
 ) character set = utf8mb4;
 
-/*==============================================================*/
-/* 电影院表                                                       */
-/*==============================================================*/
-create table cinema
-(
-   id                   bigint not null auto_increment,
-   name                 varchar(50) default null,
-   picture              varchar(200) default null,
-   address              varchar(500) default null,    /*用于显示的地址*/
-   location             varchar(500) default null,    /*用于定位的位置信息*/
-   telephone            varchar(20) default null,
-   score                float default 5.0,
-   service              varchar(100)  default null,   /*提供的服务(退票，3D眼镜)列表*/
-   primary key (id)
-) character set = utf8mb4;
 
 /*==============================================================*/
 /* 电影院与电影的关系表                                            */
@@ -208,7 +209,7 @@ create table session
 (
    id                   bigint not null auto_increment,
    cinema_film_rlt_id   bigint not null,
-   session_date                 timestamp not null default CURRENT_TIMESTAMP,   /*场次日期*/
+   session_date         timestamp not null default CURRENT_TIMESTAMP,   /*场次日期*/
    start_time           time default null,                  /*场次开始时间*/
    end_time             time default null,                  /*场次结束时间*/
    occupied_seats       varchar(3000) default null,         /*已选座位*/
