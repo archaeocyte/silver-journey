@@ -30,6 +30,7 @@ if (!module.parent) {
 
 
 	var basePath = "../../db_src";
+	var traversalDir = require("../common").traversalDir;
 
 	function checkToUpload(filesList) {
 		var item = filesList.shift();
@@ -53,7 +54,6 @@ if (!module.parent) {
 	}
 
 
-	var traversalDir = require("../common").traversalDir;
 	traversalDir(basePath, function(err, filesList) {
 		console.log(filesList);
 		checkToUpload(filesList);
