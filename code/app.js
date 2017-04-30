@@ -38,12 +38,11 @@ app.use(session({
 	saveUninitialized: false
 }));
 
-var auth_ignore = [
-	"/user/login",
-	"/film/list",
+var auth_need = [
+	
 ];
 
-app.use("/api", middlewares.auth(auth_ignore));
+app.use("/api", middlewares.auth(auth_need));
 
 app.use(route);
 

@@ -1,13 +1,14 @@
 var error_code = require("../controllers/error_code");
 
 module.exports = {
-	auth: function(auth_ignore) {
-		auth_ignore = auth_ignore || [];
+	auth: function(auth_need) {
+		auth_need = auth_need || [];
 		return function(req, res, next) {
-			var request_path = req.path,
+			var request_path = req.pathname,
 				user = req.session.user;
+
 			if (
-				auth_ignore.indexOf(request_path) >= 0
+				auth_need.indexOf(request_path) < 0
 			|| 	user
 			) {
 				return next();
