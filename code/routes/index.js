@@ -13,6 +13,7 @@ module.exports = function() {
 	router.get("/api/test", user_controller.authUser);
 
 	router.get("/api/film/list", film_controller.list);
+	router.get("/api/film/detail/:id", film_controller.detail);
 
 	return router;
 };
