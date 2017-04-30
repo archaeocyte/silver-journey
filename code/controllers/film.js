@@ -66,12 +66,12 @@ exports.list = function list(req, res, next) {
 	var ep = new eventproxy();
 	ep.fail(next);
 	ep.all([
-		"fetch_film",
+		"fetch_film_list",
 		"fetch_actor_list",
 		"fetch_director_list",
 		"fetch_language_list"
 	], function(
-		film,
+		films,
 		actors,
 		directors,
 		languages
@@ -101,6 +101,7 @@ exports.list = function list(req, res, next) {
 				}, task_callback);
 			});
 		});
+
 		async.parallelLimit(allTask, 10, function(err, films) {
 			return res.send({
 				code: error_code.SUCCESS,
