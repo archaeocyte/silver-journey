@@ -306,6 +306,16 @@ insert into actor (name)
 insert into actor (name)
             values('朱茵', 'picture/actor/zhuyin.jpg');
 
+-- 语言
+insert into language (name)
+    values ("国语");
+
+insert into language (name)
+    values ("粤语");
+
+insert into language (name)
+    values ("英语");
+
 -- 导演
 
 insert into director (name, picture, description)
@@ -402,6 +412,17 @@ insert into film_pic_still (film_id, url)
 
 insert into film_pic_still (film_id, url)
     values (2, 'picture/still/theFateoftheFurious2.jpg');
+
+-- 电影语言关系表
+
+insert into film_language (film_id, language_id)
+    values (1, 1);
+
+insert into film_language (film_id, language_id)
+    values (1, 2);
+
+insert into film_language (film_id, language_id)
+    values (2, 3);
 
 -- 预告片
 insert into film_preview (film_id, url)
