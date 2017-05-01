@@ -204,6 +204,7 @@ create table cinema_film_rlt
    cinema_id            bigint not null,
    film_id              bigint not null,
    primary key (id),
+   UNIQUE(cinema_id, film_id),
    constraint FK_film_id_rlt foreign key (film_id) references film(id),
    constraint FK_cimema_id foreign key (cinema_id) references cinema(id)
 ) character set = utf8mb4;
@@ -450,11 +451,13 @@ insert into cinema (name, picture, address, location, telephone, service)
                 );
 -- 影院-电影关系
 insert into cinema_film_rlt (cinema_id, film_id)
-            values('1', '1');
+            values(1, 1);
 insert into cinema_film_rlt (cinema_id, film_id)
-            values('1', '2');
+            values(1, 2);
 insert into cinema_film_rlt (cinema_id, film_id)
-            values('2', '1');
+            values(2, 1);
+insert into cinema_film_rlt (cinema_id, film_id)
+            values(2, 2);
 -- 影院评价
 insert into cinema_comment (cinema_id, user_id, score, content)
             values('1', '1', '9.0', '好');
