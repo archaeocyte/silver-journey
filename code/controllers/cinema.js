@@ -8,10 +8,20 @@ var async = require("async");
 function fillCinemaDetail(cinema, supply, callback) {
 	var ep = supply.ep;
 
-	cinema.services = JSON.parse(cinema.service);
-	delete cinema.service;
+	ep.all([
+		"fetch_comment_list"
+	], function(comments) {
 
-	callback(null, cinema);
+		cinema.comments = comments;
+
+		cinema.services = JSON.parse(cinema.service);
+		delete cinema.service;
+
+		callback(null, cinema);
+	});
+
+	cinema_dao.getCommentById(cinema.id, ep.done("fetch_comment_list"));
+
 }
 
 exports.list = function list(req, res, next) {
