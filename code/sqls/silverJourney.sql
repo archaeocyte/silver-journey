@@ -471,11 +471,15 @@ insert into cinema_film_rlt (cinema_id, film_id)
 insert into cinema_film_rlt (cinema_id, film_id)
             values(2, 2);
 -- 影院评价
-insert into cinema_comment (cinema_id, user_id, score, content)
-            values('1', '1', '9.0', '好');
+insert into cinema_comment (cinema_id, user_id, score)
+            values(1, 1, 100);
+
+insert into cinema_comment (cinema_id, user_id, score)
+            values(2, 1, 100);
+
 -- 电影评价
-insert into film_comment (film_id, user_id, score, content)
-            values('1', '2', '8.0', '不错');
+insert into film_comment (film_id, user_id, score)
+            values(1, 2, 80);
 -- 场次
 insert into session (cinema_film_rlt_id, session_date, start_time, video_hall_name, price, version_view)
             values(
