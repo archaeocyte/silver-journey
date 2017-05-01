@@ -1,9 +1,9 @@
 drop table if exists orderform;
 drop table if exists session;
-drop table if exists film_comment;
+drop table if exists session_language;
+drop table if exists cinema;
 drop table if exists cinema_comment;
 drop table if exists cinema_film_rlt;
-drop table if exists cinema;
 drop table if exists film_soundtrack;
 drop table if exists film_preview;
 drop table if exists film_pic_poster;
@@ -11,6 +11,7 @@ drop table if exists film_pic_still;
 drop table if exists film_language;
 drop table if exists film_actor;
 drop table if exists film_director;
+drop table if exists film_comment;
 drop table if exists film;
 drop table if exists actor;
 drop table if exists director;
@@ -113,7 +114,7 @@ create table film_language
     language_id         bigint not null,
     primary key(id),
     constraint FK_film_id_language foreign key (film_id) references film(id),
-    constraint FK_language_id foreign key (language_id) references language(id)
+    constraint FK_language_id_film foreign key (language_id) references language(id)
 ) character set = utf8mb4;
 
 
@@ -254,11 +255,22 @@ create table session
    start_time           time default null,                  /*场次开始时间*/
    video_hall_name      varchar(20) default null,           /*放映厅名*/
    price                int default null,                   /*单位是分，如32.8元，则存为3280*/
-   language_id          bigint not null,
    version_view         varchar(20) default null,           /*2D或3D*/
    primary key (id),
-   constraint FK_cinema_film_rlt_id foreign key (cinema_film_rlt_id) references cinema_film_rlt(id),
-   constraint FK_language_id_session foreign key (language_id) references language(id)
+   constraint FK_cinema_film_rlt_id foreign key (cinema_film_rlt_id) references cinema_film_rlt(id)
+) character set = utf8mb4;
+
+/*==============================================================*/
+/* 场次与语言关系表                                               */
+/*==============================================================*/
+create table session_language
+(
+    id                  bigint not null auto_increment,
+    session_id          bigint not null,
+    language_id         bigint not null,
+    primary key(id),
+    constraint FK_session_id_language foreign key (session_id) references session(id),
+    constraint FK_language_id_session foreign key (language_id) references language(id)
 ) character set = utf8mb4;
 
 /*==============================================================*/
