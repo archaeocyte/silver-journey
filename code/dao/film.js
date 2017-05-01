@@ -57,12 +57,6 @@ module.exports = {
 		`;
 		connection.query(sql, [], callback);
 	},
-	getLanguage: function(callback) {
-		var sql = `
-			select * from language
-		`;
-		connection.query(sql, [], callback);
-	},
 	getFilmLanguageById: function(id, callback) {
 		var sql = `
 			select * from film_language

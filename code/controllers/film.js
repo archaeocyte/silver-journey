@@ -1,5 +1,6 @@
 var eventproxy = require("eventproxy");
 var film_dao = require("../dao").film;
+var share_dao = require("../dao").share;
 var error_code = require("./error_code");
 var _ = require("lodash");
 var async = require("async");
@@ -115,7 +116,7 @@ exports.list = function list(req, res, next) {
 	film_dao.getFilm(null, ep.done("fetch_film_list"));
 	film_dao.getActor(null, ep.done("fetch_actor_list"));
 	film_dao.getDirector(null, ep.done("fetch_director_list"));
-	film_dao.getLanguage(ep.done("fetch_language_list"));
+	share_dao.getLanguage(ep.done("fetch_language_list"));
 };
 
 exports.detail = function detail(req, res, next) {
@@ -176,5 +177,5 @@ exports.detail = function detail(req, res, next) {
 	film_dao.getFilm(film_id, ep.done("fetch_film"));
 	film_dao.getActor(null, ep.done("fetch_actor_list"));
 	film_dao.getDirector(null, ep.done("fetch_director_list"));
-	film_dao.getLanguage(ep.done("fetch_language_list"));
+	share_dao.getLanguage(ep.done("fetch_language_list"));
 };
