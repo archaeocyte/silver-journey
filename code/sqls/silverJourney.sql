@@ -479,7 +479,10 @@ insert into cinema_comment (cinema_id, user_id, score)
 
 -- 电影评价
 insert into film_comment (film_id, user_id, score)
-            values(1, 2, 80);
+            values(1, 1, 100);
+
+insert into film_comment (film_id, user_id, score)
+            values(2, 1, 100);
 -- 场次
 insert into session (cinema_film_rlt_id, session_date, start_time, video_hall_name, price, version_view)
             values(
