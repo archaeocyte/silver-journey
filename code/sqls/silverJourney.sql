@@ -477,18 +477,46 @@ insert into cinema_comment (cinema_id, user_id, score, content)
 insert into film_comment (film_id, user_id, score, content)
             values('1', '2', '8.0', '不错');
 -- 场次
-insert into session (cinema_film_rlt_id, session_date, start_time, end_time, occupied_seats, video_hall_name, price, version_lang, version_view)
-                           values('1', '2017-4-15', '16:30:00', '18:30:00', '["3,5", "3,6", "4,5", "4,6"]',
-                              '3号厅', '3180', '英语', '3D');
-insert into session (cinema_film_rlt_id, session_date, start_time, end_time, occupied_seats, video_hall_name, price, version_lang, version_view)
-                           values('1', '2017-4-15', '19:00:00', '21:00:00', '["3,5", "3,6", "4,5", "4,6"]',
-                              '4号厅', '3280', '英语', '3D');
-insert into session (cinema_film_rlt_id, session_date, start_time, end_time, occupied_seats, video_hall_name, price, version_lang, version_view)
-                           values('2', '2017-4-16', '19:00:00', '21:00:00', '["3,5", "3,6", "4,5", "4,6"]',
-                              '4号厅', '3280', '英语', '2D');
-insert into session (cinema_film_rlt_id, session_date, start_time, end_time, occupied_seats, video_hall_name, price, version_lang, version_view)
-                           values('3', '2017-4-16', '18:00:00', '20:00:00', '["3,5", "3,6", "4,5", "4,6"]',
-                              '4号厅', '3380', '英语', '2D');
+insert into session (cinema_film_rlt_id, session_date, start_time, video_hall_name, price, version_view)
+            values(
+                1,
+                '2017-4-15',
+                '16:30:00',
+                '3号厅',
+                '3180',
+                '3D'
+                );
+
+insert into session (cinema_film_rlt_id, session_date, start_time, video_hall_name, price, version_view)
+            values(
+                1,
+                '2017-4-15',
+                '19:00:00',
+                '4号厅',
+                '3280',
+                '3D'
+                );
+
+insert into session (cinema_film_rlt_id, session_date, start_time, video_hall_name, price, version_view)
+            values(
+                2,
+                '2017-4-16',
+                '19:00:00',
+                '4号厅',
+                '3280',
+                '2D'
+                );
+
+insert into session (cinema_film_rlt_id, session_date, start_time, video_hall_name, price, version_view)
+            values(
+                3,
+                '2017-4-16',
+                '18:00:00',
+                '4号厅',
+                '3380',
+                '2D'
+                );
+
 -- 订单
 insert into orderform (session_id, user_id, seats, telephone)
                values('1', '1', '["6, 6"]', '18888888888');
