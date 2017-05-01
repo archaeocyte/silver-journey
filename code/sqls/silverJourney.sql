@@ -431,12 +431,24 @@ insert into film_preview (film_id, url)
 insert into film_soundtrack (film_id, url)
             values('1', 'someurl');
 -- 电影院
-insert into cinema (name, picture, address, location, telephone, score, service)
-            values('金逸珠江国际影城广州大学店', 'pic/1.png', '番禺区小谷街道贝岗村中二横路1号GOGO新天地商业广场二期二楼',
-                   '用于定位', '020-39340185', '7.9', '["3D眼镜", "休息区"]');
-insert into cinema (name, picture, address, location, telephone, score, service)
-            values('广州白云万达电影城', 'pic/1.png', '白云区云城东路503号白云万达广场3楼',
-                   '用于定位', '020-36689666', '7.0', '["3D眼镜", "退票"]');
+insert into cinema (name, picture, address, location, telephone, service)
+            values(
+                '金逸珠江国际影城广州大学店',
+                'pic/1.png',
+                '番禺区小谷街道贝岗村中二横路1号',
+                'GOGO新天地商业广场二期二楼',
+                '020-39340185',
+                '["3D眼镜", "休息区"]'
+                );
+insert into cinema (name, picture, address, location, telephone, service)
+            values(
+                '广州白云万达电影城',
+                'pic/2.png',
+                '白云区云城东路503号',
+                '万达广场3楼',
+                '020-36689666',
+                '["3D眼镜", "退票"]'
+                );
 -- 影院-电影关系
 insert into cinema_film_rlt (cinema_id, film_id)
             values('1', '1');
