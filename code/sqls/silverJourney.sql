@@ -251,7 +251,6 @@ create table session
    cinema_film_rlt_id   bigint not null,
    session_date         timestamp not null default CURRENT_TIMESTAMP,   /*场次日期*/
    start_time           time default null,                  /*场次开始时间*/
-   end_time             time default null,                  /*场次结束时间*/
    video_hall_name      varchar(20) default null,           /*放映厅名*/
    price                int default null,                   /*单位是分，如32.8元，则存为3280*/
    language_id          bigint not null,
@@ -434,7 +433,7 @@ insert into film_soundtrack (film_id, url)
 insert into cinema (name, picture, address, location, telephone, service)
             values(
                 '金逸珠江国际影城广州大学店',
-                'pic/1.png',
+                'picture/cinema/jinyizhujiangguojiyingcheng.jpg',
                 '番禺区小谷街道贝岗村中二横路1号',
                 'GOGO新天地商业广场二期二楼',
                 '020-39340185',
@@ -443,7 +442,7 @@ insert into cinema (name, picture, address, location, telephone, service)
 insert into cinema (name, picture, address, location, telephone, service)
             values(
                 '广州白云万达电影城',
-                'pic/2.png',
+                'picture/cinema/wandayingcheng.jpg',
                 '白云区云城东路503号',
                 '万达广场3楼',
                 '020-36689666',
