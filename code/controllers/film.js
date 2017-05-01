@@ -16,13 +16,15 @@ function fillFilmDetail(film, supply, callback) {
 		`${film.id}_get_film_director`,
 		`${film.id}_get_film_poster`,
 		`${film.id}_get_film_still`,
-		`${film.id}_get_film_language`
+		`${film.id}_get_film_language`,
+		`${film.id}_get_film_comment`
 	], function(
 		film_actors,
 		film_directors,
 		film_posters,
 		film_stills,
-		film_languages
+		film_languages,
+		comments
 	) {
 
 		film.actors = [];
@@ -48,6 +50,8 @@ function fillFilmDetail(film, supply, callback) {
 			film.stills.push(item.url);
 		});
 
+		film.comments = comments;
+
 		film.types = JSON.parse(film.type);
 		delete film.type;
 
@@ -60,6 +64,7 @@ function fillFilmDetail(film, supply, callback) {
 	film_dao.getFilmPosterById(film.id, ep.done(`${film.id}_get_film_poster`));
 	film_dao.getFilmStillById(film.id, ep.done(`${film.id}_get_film_still`));
 	film_dao.getFilmLanguageById(film.id, ep.done(`${film.id}_get_film_language`));
+	film_dao.getCommentById(film.id, ep.done(`${film.id}_get_film_comment`));
 
 }
 
