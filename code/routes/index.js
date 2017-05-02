@@ -17,6 +17,7 @@ module.exports = function() {
 	router.get("/api/film/detail/:id", film_controller.detail);
 
 	router.get("/api/cinema/list", cinema_controller.list);
+	router.get("/api/cinema/findBy/:id", cinema_controller.findBy);
 
 	return router;
 };

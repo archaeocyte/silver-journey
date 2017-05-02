@@ -9,7 +9,7 @@ function fillCinemaDetail(cinema, supply, callback) {
 	var ep = supply.ep;
 
 	ep.all([
-		"fetch_comment_list"
+		`${cinema.id}_get_comment`
 	], function(comments) {
 
 		cinema.comments = comments;
@@ -20,7 +20,7 @@ function fillCinemaDetail(cinema, supply, callback) {
 		callback(null, cinema);
 	});
 
-	cinema_dao.getCommentById(cinema.id, ep.done("fetch_comment_list"));
+	cinema_dao.getCommentById(cinema.id, ep.done(`${cinema.id}_get_comment`));
 
 }
 
@@ -51,4 +51,33 @@ exports.list = function list(req, res, next) {
 	});
 
 	cinema_dao.getCinema(null, ep.done("fetch_cinema_list"));
+};
+
+
+exports.findBy = function findBy(req, res, next) {
+	var film_id = req.params.id,
+		ep = new eventproxy();
+
+	ep.on("fetch_cinema_list", function(cinemas) {
+		var allTask = [];
+		_.forEach(cinemas, function(cinema) {
+			allTask.push(function(task_callback) {
+				fillCinemaDetail(cinema, {
+					ep: ep
+				}, task_callback);
+			});
+		});
+
+		async.parallelLimit(allTask, 10, function(err, cinemas) {
+			return res.send({
+				code: error_code.SUCCESS,
+				data: {
+					cinemas: cinemas
+				},
+				msg: "SUCCESS"
+			});
+		});
+	});
+
+	share_dao.getCinemaByFilmId(film_id, ep.done("fetch_cinema_list"));
 };
