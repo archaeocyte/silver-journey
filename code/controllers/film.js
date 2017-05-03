@@ -8,7 +8,6 @@ var async = require("async");
 function fillFilmDetail(film, supply, callback) {
 	var actor_map = supply.actor_map,
 		director_map = supply.actor_map,
-		language_map = supply.language_map,
 		ep = supply.ep;
 
 	ep.all([
@@ -37,10 +36,7 @@ function fillFilmDetail(film, supply, callback) {
 			film.actors.push(actor);
 		});
 
-		_.forEach(film_languages, function(item) {
-			var language = language_map[item.language_id];
-			film.languages.push(language);
-		});
+		film.languages = film_languages;
 
 		_.forEach(film_posters, function(item) {
 			film.posters.push(item.url);
@@ -74,26 +70,20 @@ exports.list = function list(req, res, next) {
 	ep.all([
 		"fetch_film_list",
 		"fetch_actor_list",
-		"fetch_director_list",
-		"fetch_language_list"
+		"fetch_director_list"
 	], function(
 		films,
 		actors,
-		directors,
-		languages
+		directors
 	) {
 
 		var actor_map = {},
-			director_map = {},
-			language_map = {};
+			director_map = {};
 		_.forEach(actors, function(actor) {
 			actor_map[actor.id] = actor;
 		});
 		_.forEach(directors, function(director) {
 			director_map[director.id] = director;
-		});
-		_.forEach(languages, function(language) {
-			language_map[language.id] = language;
 		});
 
 		var allTask = [];
@@ -102,7 +92,6 @@ exports.list = function list(req, res, next) {
 				fillFilmDetail(film, {
 					actor_map: actor_map,
 					director_map: director_map,
-					language_map: language_map,
 					ep: ep
 				}, task_callback);
 			});
@@ -121,7 +110,6 @@ exports.list = function list(req, res, next) {
 	film_dao.getFilm(null, ep.done("fetch_film_list"));
 	film_dao.getActor(null, ep.done("fetch_actor_list"));
 	film_dao.getDirector(null, ep.done("fetch_director_list"));
-	share_dao.getLanguage(ep.done("fetch_language_list"));
 };
 
 exports.detail = function detail(req, res, next) {
@@ -131,18 +119,15 @@ exports.detail = function detail(req, res, next) {
 	ep.all([
 		"fetch_film",
 		"fetch_actor_list",
-		"fetch_director_list",
-		"fetch_language_list"
+		"fetch_director_list"
 	], function(
 		films,
 		actors,
-		directors,
-		languages
+		directors
 	) {
 
 		var actor_map = {},
 			director_map = {},
-			language_map = {},
 			film = films[0];
 		if (!film) {
 			return res.send({
@@ -156,9 +141,6 @@ exports.detail = function detail(req, res, next) {
 		});
 		_.forEach(directors, function(director) {
 			director_map[director.id] = director;
-		});
-		_.forEach(languages, function(language) {
-			language_map[language.id] = language;
 		});
 
 		ep.on("fill_film", function(film) {
@@ -174,7 +156,6 @@ exports.detail = function detail(req, res, next) {
 		fillFilmDetail(film, {
 			actor_map: actor_map,
 			director_map: director_map,
-			language_map: language_map,
 			ep: ep
 		}, ep.done("fill_film"));
 
@@ -182,5 +163,4 @@ exports.detail = function detail(req, res, next) {
 	film_dao.getFilm(film_id, ep.done("fetch_film"));
 	film_dao.getActor(null, ep.done("fetch_actor_list"));
 	film_dao.getDirector(null, ep.done("fetch_director_list"));
-	share_dao.getLanguage(ep.done("fetch_language_list"));
 };

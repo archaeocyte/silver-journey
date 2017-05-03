@@ -65,8 +65,11 @@ exports.getFilmStillById = function getFilmStillById(id, callback) {
 
 exports.getFilmLanguageById = function getFilmLanguageById(id, callback) {
 	var sql = `
-		select * from film_language
-		where film_id = ${id}
+		select language.* from (
+			select language_id from film_language
+			where film_id = ${id}
+		) f_l
+		left join language on f_l.language_id = language.id
 	`;
 	connection.query(sql, [], callback);
 };
