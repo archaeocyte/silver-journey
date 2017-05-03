@@ -13,8 +13,11 @@ exports.getFilm = function getFilm(id, callback) {
 
 exports.getFilmActorById = function getFilmActorById(id, callback) {
 	var sql = `
-		select * from film_actor
-		where film_id = ${id}
+		select actor.*, f_a.role_name, f_a.id as rlt_id from (
+			select actor_id, role_name, id from film_actor
+			where film_id = ${id}
+		) f_a
+		left join actor on actor.id = f_a.actor_id
 	`;
 	connection.query(sql, [], callback);
 };
@@ -31,8 +34,11 @@ exports.getActor = function getActor(id, callback) {
 
 exports.getFilmDirectorById = function getFilmDirectorById(id, callback) {
 	var sql = `
-		select * from film_director
-		where film_id = ${id}
+		select director.*, f_d.id as rlt_id from (
+			select director_id, id from film_director
+			where film_id = ${id}
+		) f_d
+		left join director on director.id = f_d.director_id
 	`;
 	connection.query(sql, [], callback);
 };
