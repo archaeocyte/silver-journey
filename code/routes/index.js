@@ -7,6 +7,7 @@ var path = require("path");
 var user_controller = require("../controllers").user;
 var film_controller = require("../controllers").film;
 var cinema_controller = require("../controllers").cinema;
+var session_controller = require("../controllers").session;
 
 module.exports = function() {
 
@@ -20,6 +21,9 @@ module.exports = function() {
 	router.get("/api/cinema/list", cinema_controller.list);
 	router.get("/api/cinema/detail/:id", cinema_controller.detail);
 	router.get("/api/cinema/findBy/:id", cinema_controller.findBy);
+
+	router.get("/api/session/findBy/cinema/:id", session_controller.findByCinema);
+	router.get("/api/session/findBy/film/:id", session_controller.findByFilm);
 
 	return router;
 };
