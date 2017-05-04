@@ -20,3 +20,4 @@ exports.getCommentById = function getCommentById(id, callback) {
 	connection.query(sql, [], callback);
 };
 
+

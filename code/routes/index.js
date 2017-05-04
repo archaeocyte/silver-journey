@@ -18,6 +18,7 @@ module.exports = function() {
 	router.get("/api/film/findBy/:id", film_controller.findBy);
 
 	router.get("/api/cinema/list", cinema_controller.list);
+	router.get("/api/cinema/detail/:id", cinema_controller.detail);
 	router.get("/api/cinema/findBy/:id", cinema_controller.findBy);
 
 	return router;

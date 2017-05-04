@@ -10,9 +10,11 @@ function fillCinemaDetail(cinema, supply, callback) {
 
 	ep.all([
 		`${cinema.id}_get_comment`
-	], function(comments) {
+	], function(
+		cinema_comments
+	) {
 
-		cinema.comments = comments;
+		cinema.comments = cinema_comments;
 
 		cinema.services = JSON.parse(cinema.service);
 		delete cinema.service;
@@ -51,6 +53,41 @@ exports.list = function list(req, res, next) {
 	});
 
 	cinema_dao.getCinema(null, ep.done("fetch_cinema_list"));
+};
+
+exports.detail = function detail(req, res, next) {
+	var ep = new eventproxy(),
+		cinema_id = req.params.id;
+	ep.fail(next);
+
+	ep.on("fetch_cinema_list", function(cinemas) {
+		var cinema = cinemas[0];
+
+		if (!cinema) {
+			return res.send({
+				code: error_code.CINEMA_NOT_FOUND,
+				data: {},
+				msg: "CINEMA_NOT_FOUND"
+			});
+		}
+
+		ep.on("fill_cinema", function(cinema) {
+			return res.send({
+				code: error_code.SUCCESS,
+				data: {
+					cinema: cinema
+				},
+				msg: "SUCCESS"
+			});
+		});
+
+		fillCinemaDetail(cinema, {
+			ep: ep
+		}, ep.done("fill_cinema"));
+		
+	});
+
+	cinema_dao.getCinema(cinema_id, ep.done("fetch_cinema_list"));
 };
 
 
