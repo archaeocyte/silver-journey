@@ -206,6 +206,7 @@ create table cinema_film_rlt
    film_id              bigint not null,
    primary key (id),
    UNIQUE(cinema_id, film_id),
+   KEY(film_id),
    constraint FK_film_id_rlt foreign key (film_id) references film(id),
    constraint FK_cimema_id foreign key (cinema_id) references cinema(id)
 ) character set = utf8mb4;
@@ -487,7 +488,7 @@ insert into film_comment (film_id, user_id, score)
 insert into session (cinema_film_rlt_id, session_time, video_hall_name, price, version_view)
             values(
                 1,
-                '2017-4-15 16:30:00',
+                '2017-04-15 16:30:00',
                 '3号厅',
                 '3180',
                 '3D'
@@ -496,7 +497,7 @@ insert into session (cinema_film_rlt_id, session_time, video_hall_name, price, v
 insert into session (cinema_film_rlt_id, session_time, video_hall_name, price, version_view)
             values(
                 1,
-                '2017-4-15 19:00:00',
+                '2017-04-15 19:00:00',
                 '4号厅',
                 '3280',
                 '3D'
@@ -505,7 +506,7 @@ insert into session (cinema_film_rlt_id, session_time, video_hall_name, price, v
 insert into session (cinema_film_rlt_id, session_time, video_hall_name, price, version_view)
             values(
                 2,
-                '2017-4-16 19:00:00',
+                '2017-04-16 19:00:00',
                 '4号厅',
                 '3280',
                 '2D'
@@ -514,7 +515,7 @@ insert into session (cinema_film_rlt_id, session_time, video_hall_name, price, v
 insert into session (cinema_film_rlt_id, session_time, video_hall_name, price, version_view)
             values(
                 3,
-                '2017-4-16 18:00:00',
+                '2017-04-16 18:00:00',
                 '4号厅',
                 '3380',
                 '2D'
