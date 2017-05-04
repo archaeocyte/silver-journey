@@ -126,3 +126,35 @@ exports.detail = function detail(req, res, next) {
 	});
 	film_dao.getFilm(film_id, ep.done("fetch_film"));
 };
+
+exports.findBy = function findBy(req, res, next) {
+	var cinema_id = req.params.id,
+		ep = new eventproxy();
+
+	ep.fail(next);
+
+	ep.all([
+		"fetch_film_list"
+	], function(films) {
+		var allTask = [];
+		_.forEach(films, function(film) {
+			allTask.push(function(task_callback) {
+				fillFilmDetail(film, {
+					ep: ep
+				}, task_callback);
+			});
+		});
+
+		async.parallelLimit(allTask, 10, function(err, films) {
+			return res.send({
+				code: error_code.SUCCESS,
+				data: {
+					films: films
+				},
+				msg: "SUCCESS"
+			});
+		});
+	});
+	share_dao.getFilmByCinemaId(cinema_id, ep.done("fetch_film_list"));
+
+};
