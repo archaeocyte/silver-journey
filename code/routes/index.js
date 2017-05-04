@@ -24,6 +24,8 @@ module.exports = function() {
 
 	router.get("/api/session/findBy/cinema/:id", session_controller.findByCinema);
 	router.get("/api/session/findBy/film/:id", session_controller.findByFilm);
+	router.get("/api/session/findBy/:cinema_id/:film_id", session_controller.findBy);
+	router.get("/api/session/detail/:id", session_controller.detail);
 
 	return router;
 };
