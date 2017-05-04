@@ -251,8 +251,7 @@ create table session
 (
    id                   bigint not null auto_increment,
    cinema_film_rlt_id   bigint not null,
-   session_date         timestamp not null default CURRENT_TIMESTAMP,   /*场次日期*/
-   start_time           time default null,                  /*场次开始时间*/
+   session_time         datetime not null default NOW(),   /*场次时间*/
    video_hall_name      varchar(20) default null,           /*放映厅名*/
    price                int default null,                   /*单位是分，如32.8元，则存为3280*/
    version_view         varchar(20) default null,           /*2D或3D*/
@@ -283,6 +282,7 @@ create table orderform
    user_id              bigint not null,
    seats                varchar(1000) default null,         /*选择的座位列表，一个订单可选多个座位*/
    telephone            varchar(20) default null,           /*取票手机号码*/
+   create_time          timestamp not null default CURRENT_TIMESTAMP,   /*订单创建时间*/
    primary key (id),
    constraint FK_session_id foreign key (session_id) references session(id),
    constraint FK_user_id_order foreign key (user_id) references user(id)
@@ -484,41 +484,37 @@ insert into film_comment (film_id, user_id, score)
 insert into film_comment (film_id, user_id, score)
             values(2, 1, 100);
 -- 场次
-insert into session (cinema_film_rlt_id, session_date, start_time, video_hall_name, price, version_view)
+insert into session (cinema_film_rlt_id, session_time, video_hall_name, price, version_view)
             values(
                 1,
-                '2017-4-15',
-                '16:30:00',
+                '2017-4-15 16:30:00',
                 '3号厅',
                 '3180',
                 '3D'
                 );
 
-insert into session (cinema_film_rlt_id, session_date, start_time, video_hall_name, price, version_view)
+insert into session (cinema_film_rlt_id, session_time, video_hall_name, price, version_view)
             values(
                 1,
-                '2017-4-15',
-                '19:00:00',
+                '2017-4-15 19:00:00',
                 '4号厅',
                 '3280',
                 '3D'
                 );
 
-insert into session (cinema_film_rlt_id, session_date, start_time, video_hall_name, price, version_view)
+insert into session (cinema_film_rlt_id, session_time, video_hall_name, price, version_view)
             values(
                 2,
-                '2017-4-16',
-                '19:00:00',
+                '2017-4-16 19:00:00',
                 '4号厅',
                 '3280',
                 '2D'
                 );
 
-insert into session (cinema_film_rlt_id, session_date, start_time, video_hall_name, price, version_view)
+insert into session (cinema_film_rlt_id, session_time, video_hall_name, price, version_view)
             values(
                 3,
-                '2017-4-16',
-                '18:00:00',
+                '2017-4-16 18:00:00',
                 '4号厅',
                 '3380',
                 '2D'
