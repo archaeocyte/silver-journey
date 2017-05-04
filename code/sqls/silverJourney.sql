@@ -521,6 +521,18 @@ insert into session (cinema_film_rlt_id, session_time, video_hall_name, price, v
                 '2D'
                 );
 
+insert into session_language (session_id, language_id)
+            values(2, 2);
+
+insert into session_language (session_id, language_id)
+            values(3, 2);
+
+insert into session_language (session_id, language_id)
+            values(4, 3);
+
+insert into session_language (session_id, language_id)
+            values(5, 1);
+
 -- 订单
 insert into orderform (session_id, user_id, seats, telephone)
                values('1', '1', '["6, 6"]', '18888888888');
