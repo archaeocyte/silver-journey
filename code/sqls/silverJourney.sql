@@ -269,6 +269,7 @@ create table session_language
     session_id          bigint not null,
     language_id         bigint not null,
     primary key(id),
+    UNIQUE(session_id),
     constraint FK_session_id_language foreign key (session_id) references session(id),
     constraint FK_language_id_session foreign key (language_id) references language(id)
 ) character set = utf8mb4;
