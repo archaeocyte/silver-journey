@@ -10,7 +10,7 @@ var user_controller = controllers.user;
 var film_controller = controllers.film;
 var cinema_controller = controllers.cinema;
 var session_controller = controllers.session;
-var upload_controller = controllers.upload;
+var cos_controller = controllers.cos;
 
 module.exports = function() {
 
@@ -30,7 +30,7 @@ module.exports = function() {
 	router.get("/api/session/findBy/:cinema_id/:film_id", session_controller.findBy);
 	router.get("/api/session/detail/:id", session_controller.detail);
 
-	router.post("/api/upload/photo", upload_controller.photo);
+	router.post("/api/cos/upload/photo", cos_controller.uploadPhoto);
 
 	return router;
 };

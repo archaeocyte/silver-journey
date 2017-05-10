@@ -1,6 +1,6 @@
 <template>
     <div id="upload-photo">
-        <!-- action="http://localhost:3000/api/upload/photo" -->
+        <!-- action="http://localhost:3000/api/cos/upload/photo" -->
         <!-- action="javascript: void 0;" -->
         <form
             id="upload-photo-form"
@@ -23,7 +23,7 @@ module.exports = {
     data() {
         return {
             $form: null,
-            model_path: ""
+            model_dir_path: ""
         };
     },
     mounted() {
@@ -39,7 +39,7 @@ module.exports = {
             console.log(fd);
             var dir_path = vm.model_dir_path || "";
             var url = `
-                /api/upload/photo?ContentLength=${ContentLength}&dir_path=${dir_path}
+                /api/cos/upload/photo?ContentLength=${ContentLength}&dir_path=${dir_path}
             `;
             $.ajax({
                 url: url,

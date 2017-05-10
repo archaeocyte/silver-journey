@@ -3,5 +3,5 @@ module.exports = {
 	film: require("./film"),
 	cinema: require("./cinema"),
 	session: require("./session"),
-	upload: require("./upload")
+	cos: require("./cos")
 };

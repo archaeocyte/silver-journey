@@ -51,7 +51,7 @@ var auth_need = [
 
 app.use("/api", middlewares.auth(auth_need));
 
-app.use("/api/upload", busboy({
+app.use("/api/cos", busboy({
     limits: {
         fileSize: 2000 * 1024 * 1024
     }

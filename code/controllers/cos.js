@@ -5,7 +5,7 @@ var _ = require("lodash");
 var cosAPI = require("../sdk").cosAPI;
 
 
-exports.photo = function photo(req, res, next) {
+exports.uploadPhoto = function uploadPhoto(req, res, next) {
     var body = req.body,
     	query = req.query;
 
