@@ -12,6 +12,8 @@ var webpack = require('webpack')
 var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = require('./webpack.dev.conf')
 
+var bodyParser = require('body-parser');
+
 // default port where dev server listens for incoming traffic
 var port = process.env.PORT || config.dev.port
 // automatically open browser, if not set will be false
@@ -39,14 +41,21 @@ compiler.plugin('compilation', function (compilation) {
   })
 })
 
+app.use(bodyParser.json({limit: '5000mb'}));
+
+app.use(bodyParser.urlencoded({ extended: false, limit: '5000mb' }));
+
+app.use('/api/*', proxyMiddleware({
+    target: "http://localhost:3000"
+}));
 // proxy api requests
-Object.keys(proxyTable).forEach(function (context) {
-  var options = proxyTable[context]
-  if (typeof options === 'string') {
-    options = { target: options }
-  }
-  app.use(proxyMiddleware(options.filter || context, options))
-})
+// Object.keys(proxyTable).forEach(function (context) {
+//   var options = proxyTable[context]
+//   if (typeof options === 'string') {
+//     options = { target: options }
+//   }
+//   app.use(proxyMiddleware(options.filter || context, options))
+// })
 
 // handle fallback for HTML5 history API
 app.use(require('connect-history-api-fallback')())
