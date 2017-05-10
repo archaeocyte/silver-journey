@@ -2,6 +2,8 @@ var eventproxy = require("eventproxy");
 var error_code = require("./error_code");
 var _ = require("lodash");
 
+var CryptoJS = require("crypto-js");
+
 var SDK = require("../sdk"),
     cosAPI = SDK.cosAPI,
     cosUtil = SDK.cosUtil,
@@ -68,12 +70,28 @@ exports.getAuth = function getAuth(req, res, next) {
         secretKey : cosConfig.SECRET_KEY,
         headers: {},
         pathname: "/",
-        method: "GET"
+        method: "GET",
+        bucket: "silverjourney",
+        path: ""
     };
+
     var query = req.query;
     var options = _.extend(defaultAuth, query);
+
+    var random = parseInt(Math.random() * Math.pow(2, 32));
+    var now = parseInt(new Date().getTime() / 1000);
+    var e = now + 60; //单次签名 expire==0
+    var path = options.path;
+    var str = 'a=' + options.appid + '&k=' + options.secretId + '&e=' + e + '&t=' + now + '&r=' + random +
+            '&f=' + path + '&b=' + options.bucket;
+    console.log(str);
+    var sha1Res = CryptoJS.HmacSHA1(str, options.secretKey);//这里使用CryptoJS计算sha1值，你也可以用其他开源库或自己实现
+    var strWordArray = CryptoJS.enc.Utf8.parse(str);
+    var resWordArray = sha1Res.concat(strWordArray);
+    var sign = resWordArray.toString(CryptoJS.enc.Base64);
+
+
     console.log(options);
-    var sign = cosUtil.getAuth(options);
     return res.send({
         code: error_code.SUCCESS,
         data: {
