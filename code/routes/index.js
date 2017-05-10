@@ -31,6 +31,7 @@ module.exports = function() {
 	router.get("/api/session/detail/:id", session_controller.detail);
 
 	router.post("/api/cos/upload/photo", cos_controller.uploadPhoto);
+	router.get("/api/cos/auth/get", cos_controller.getAuth);
 
 	return router;
 };

@@ -1,4 +1,5 @@
 module.exports = {
 	cosAPI: require("./qc").cosAPI,
-	cosGetAuth: require("./qc").cosGetAuth
+	cosUtil: require("./qc").cosUtil,
+	cosConfig: require("./qc").cosConfig
 };
