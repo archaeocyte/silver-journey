@@ -4,10 +4,13 @@ var router = express.Router();
 
 var path = require("path");
 
-var user_controller = require("../controllers").user;
-var film_controller = require("../controllers").film;
-var cinema_controller = require("../controllers").cinema;
-var session_controller = require("../controllers").session;
+var controllers = require("../controllers");
+
+var user_controller = controllers.user;
+var film_controller = controllers.film;
+var cinema_controller = controllers.cinema;
+var session_controller = controllers.session;
+var upload_controller = controllers.upload;
 
 module.exports = function() {
 
@@ -26,6 +29,8 @@ module.exports = function() {
 	router.get("/api/session/findBy/film/:id", session_controller.findByFilm);
 	router.get("/api/session/findBy/:cinema_id/:film_id", session_controller.findBy);
 	router.get("/api/session/detail/:id", session_controller.detail);
+
+	router.post("/api/upload/photo", upload_controller.photo);
 
 	return router;
 };
