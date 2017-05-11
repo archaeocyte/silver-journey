@@ -82,9 +82,8 @@ exports.getAuth = function getAuth(req, res, next) {
     var now = parseInt(new Date().getTime() / 1000);
     var e = now + 60; //单次签名 expire==0
     var path = options.path;
-    var str = 'a=' + options.appid + '&k=' + options.secretId + '&e=' + e + '&t=' + now + '&r=' + random +
-            '&f=' + path + '&b=' + options.bucket;
-    console.log(str);
+    var str = 'a=' + options.appid + '&k=' + options.secretId + '&e=' + e + '&t=' + now + '&r='+
+            random + '&f=' + path + '&b=' + options.bucket;
     var sha1Res = CryptoJS.HmacSHA1(str, options.secretKey);//这里使用CryptoJS计算sha1值，你也可以用其他开源库或自己实现
     var strWordArray = CryptoJS.enc.Utf8.parse(str);
     var resWordArray = sha1Res.concat(strWordArray);
