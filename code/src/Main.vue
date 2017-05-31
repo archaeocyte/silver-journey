@@ -1,5 +1,6 @@
 <template>
     <div id="main">
+        <nav-bar></nav-bar>
         <router-view></router-view>
     </div>
 </template>
@@ -8,7 +9,10 @@
 
 
 module.exports = {
-    name: 'main'
+    name: 'main',
+    components: {
+        "nav-bar": require("./components/nav-bar/index.vue")
+    }
 }
 </script>
 
