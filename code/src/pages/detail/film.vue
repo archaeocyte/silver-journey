@@ -1,6 +1,5 @@
 <template>
-    <div id='test'>
-        <router-view></router-view>
+    <div id='detail-film'>
     </div>
 </template>
 
@@ -8,7 +7,7 @@
 
 
 module.exports = {
-    name: 'test'
+    name: 'detail-film'
 }
 </script>
 
