@@ -8,6 +8,10 @@ Vue.config.productionTip = false
 
 require("./style/index.less");
 
+import NProgress from "./common/nprogress.js"
+
+window.NProgress = NProgress;
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

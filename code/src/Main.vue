@@ -1,7 +1,10 @@
 <template>
     <div id="main">
         <nav-bar></nav-bar>
-        <router-view></router-view>
+        <transition :name="transitionName" mode="out-in">
+            <router-view></router-view>
+        </transition>
+        <footer-bar></footer-bar>
     </div>
 </template>
 
@@ -10,8 +13,14 @@
 
 module.exports = {
     name: 'main',
+    data() {
+        return {
+            transitionName: 'page-fade'
+        };
+    },
     components: {
-        "nav-bar": require("./components/nav-bar/index.vue")
+        "nav-bar": require("./components/nav-bar/index.vue"),
+        "footer-bar": require("./components/footer-bar/index.vue")
     }
 }
 </script>
