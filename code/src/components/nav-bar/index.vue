@@ -5,7 +5,8 @@
                 <div class='logo'></div>
             </div>
             <div class='right-part user-field'>
-                <p>用户名</p>
+                <input class='login' type='button' value='登录' />
+                <input class='register' type='button' value='注册' />
             </div>
         </div>
     </div>
@@ -45,8 +46,25 @@ module.exports = {
 }
 
 .user-field {
-    line-height: 60px;
+    margin-top: 19px;
 }
 
+
+input[type="button"] {
+    width: 32px;
+    height: 22px;
+    line-height: 22px;
+    font-size: 16px;
+    font-family: PingFangSC-Regular;
+    background-color: #333333;
+    color: #ffffff;
+    letter-spacing:-0.32px;
+    text-align:left;
+    border: none;
+}
+
+.register {
+    margin-left: 25px;
+}
 
 </style>
