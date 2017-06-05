@@ -41,7 +41,7 @@ module.exports = {
         width: 137px;
         height: 19px;
         background-size: 137px 19px;
-        background-image: url("../../assets/images/logo.png");
+        background-image: url("../../assets/images/index/logo.png");
     }
 }
 

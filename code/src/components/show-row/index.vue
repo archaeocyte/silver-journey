@@ -46,9 +46,9 @@ module.exports = {
     name: 'show-row',
     data() {
         return {
-            picOne: require('../../assets/images/hot_one.png'),
-            picTwo: require('../../assets/images/hot_two.png'),
-            hide: require('../../assets/images/hot_hidden.png')
+            picOne: require('../../assets/images/index/hot_one.png'),
+            picTwo: require('../../assets/images/index/hot_two.png'),
+            hide: require('../../assets/images/index/hot_hidden.png')
         };
     },
     methods: {

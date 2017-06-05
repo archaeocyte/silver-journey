@@ -5,7 +5,7 @@
         <div id='hot'>
             <div id='hot-wrapper'>
                 <div id='topic'>
-                    <img src='../../assets/images/fire.png' />
+                    <img src='../../assets/images/index/fire.png' />
                     <span>正在热映</span>
                 </div>
                 <div id='view'>
@@ -14,15 +14,32 @@
                     <show-row v-show='show'></show-row>
                 </div>
                 <div id='more' @click="addRows" v-show='down'>
-			        <img src='../../assets/images/arrow.png' />
+			        <img src='../../assets/images/index/arrow.png' />
 			        <span>更多</span>
 			    </div>
 			    <div id='up' v-show='up'>
 				    <span>已无更多</span>
 			        <div id="up_center" @click="deleteRows">
-				        <img src='../../assets/images/up.png' />
+				        <img src='../../assets/images/index/up.png' />
 				        <span>收起</span>
 			        </div>
+			    </div>
+            </div>
+        </div>
+        <div id='will'>
+        </div>
+        <div id='nearby'>
+            <div id='nearby-wrapper'>
+                <div id='top'>
+                    <img src='../../assets/images/index/loc.png' />
+                    <span>附近影院</span>
+                </div>
+                <div id='store'>
+			            <theatre></theatre>
+			            <img src='../../assets/images/index/line.png' />
+			            <theatre></theatre>
+			            <img src='../../assets/images/index/line.png' />
+			            <theatre></theatre>
 			    </div>
             </div>
         </div>
@@ -56,7 +73,8 @@ module.exports = {
 
     },
     components: {
-        "show-row": require("../../components/show-row/index.vue")
+        "show-row": require("../../components/show-row/index.vue"),
+        "theatre": require("../../components/theatre/index.vue")
     }
 }
 </script>
@@ -68,11 +86,11 @@ module.exports = {
 	height: 400px;
 }
 
-#hot {
+#hot, #nearby {
 	width: 100%;
 }
 
-#hot-wrapper {
+#hot-wrapper, #nearby-wrapper {
 	width: 980px;
 	margin: 0 auto;
 }
@@ -161,6 +179,50 @@ module.exports = {
 
 	}
 	
+}
+
+#will {
+	background-color: blue;
+	width: 100%;
+	height: 400px;
+}
+
+#top {
+    width: 100%;
+	height: 30px;
+	line-height: 30px;
+	margin-top: 59px;
+	img {
+	    width: 26px;
+	    height: 30px;
+	    float: left;
+	}
+	span {
+	    width: 80px;
+	    height: 24px;
+	    margin-left: 32px;
+	    font-family: PingFangSC-Medium;
+        font-size: 20px;
+        color: #333333;
+        letter-spacing: 0;
+        text-align: left;
+        display: inline-block;
+	}
+}
+
+#store {
+	width: 100%;
+	margin-top: 69px;
+	img {
+	    width: 979px;
+	    height: 2px;
+	    margin-top: 20px;
+	    margin-bottom: 38px;
+	}
+}
+
+#nearby {
+	margin-bottom: 101px;
 }
 
 </style>
