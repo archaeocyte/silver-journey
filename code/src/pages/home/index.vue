@@ -1,6 +1,7 @@
 <template>
     <div id='home-index'>
         <div id='lunbo'>
+        	<options></options>
         </div>
         <div id='hot'>
             <div id='hot-wrapper'>
@@ -27,6 +28,11 @@
             </div>
         </div>
         <div id='will'>
+        	<div id='titleon'>
+        		<img src='../../assets/images/index/todoicon.png' />
+            	<span>即将上映</span>
+            </div>
+        	<Options></Options>
         </div>
         <div id='nearby'>
             <div id='nearby-wrapper'>
@@ -74,7 +80,10 @@ module.exports = {
     },
     components: {
         "show-row": require("../../components/show-row/index.vue"),
-        "theatre": require("../../components/theatre/index.vue")
+        "theatre": require("../../components/theatre/index.vue"),
+    	'options':require("../../components/autoswiper/index.vue"),
+    	'Options':require("../../components/buttonswiper/index.vue"),
+
     }
 }
 </script>
@@ -94,6 +103,34 @@ module.exports = {
 	width: 980px;
 	margin: 0 auto;
 }
+
+#titleon {
+	width: 980px;
+	height: 30px;
+	line-height: 30px;
+	margin:0 auto;
+	text-align:center;
+	margin-bottom:60px;
+	img {
+		width: 30px;
+	    height: 30px;
+	    float:left;
+	}
+	span {
+		float:left;
+		margin-top:5px;
+		margin-left:15px;
+		width: 80px;
+	    height: 24px;
+		font-family:PingFangSC-Medium;
+		font-size:20px;
+		color:#333333;
+		letter-spacing:0;
+		line-height:24px;
+		text-align:left;
+	}
+}
+
 
 #topic {
     width: 100%;
@@ -182,9 +219,8 @@ module.exports = {
 }
 
 #will {
-	background-color: blue;
-	width: 100%;
 	height: 400px;
+	text-align:center;
 }
 
 #top {
@@ -222,6 +258,7 @@ module.exports = {
 }
 
 #nearby {
+	margin-top: 100px;
 	margin-bottom: 101px;
 }
 
