@@ -3,9 +3,13 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import vueTap from 'v-tap'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
 
 Vue.config.productionTip = false
 
+Vue.use(VueAwesomeSwiper);
+Vue.use(vueTap);
 require("./style/index.less");
 
 import NProgress from "./common/nprogress.js"
