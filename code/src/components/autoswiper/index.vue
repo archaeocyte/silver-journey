@@ -15,7 +15,7 @@
         </swiper-slide>
         <swiper-slide>
             <div>
-            <img src='../../assets/images/index/speed.png'>
+            <img src='../../assets/images/index/lunbo_2.jpg'>
             <div class="wordspan">
             <ul>
             <li>正在热映</li>
@@ -27,7 +27,7 @@
         </swiper-slide>
         <swiper-slide>
             <div>
-            <img src='../../assets/images/index/speed.png'>
+            <img src='../../assets/images/index/lunbo_3.jpg'>
             <div class="wordspan">
             <ul>
             <li>正在热映</li>

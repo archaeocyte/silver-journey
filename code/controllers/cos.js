@@ -6,7 +6,6 @@ var CryptoJS = require("crypto-js");
 
 var SDK = require("../sdk"),
     cosAPI = SDK.cosAPI,
-    cosUtil = SDK.cosUtil,
     cosConfig = SDK.cosConfig;
 
 

@@ -1,7 +1,4 @@
-var cosAPI = require('cos-nodejs-sdk-v5'),
-	cosConfig = require('cos-nodejs-sdk-v5/sdk/config'),
-	cosUtil = require('cos-nodejs-sdk-v5/sdk/util'),
-	cosConfig = require('cos-nodejs-sdk-v5/sdk/config'),
+var cos = require('cos-nodejs-sdk-v5'),
 	wuaotian,
 	AppId,
 	SecretId,
@@ -19,13 +16,19 @@ try {
 
 }
 
-cosConfig.setAppInfo(AppId, SecretId, SecretKey);
 
-
+var cosAPI = new cos({
+	AppId: AppId,
+	SecretId: SecretId,
+	SecretKey: SecretKey
+});
 
 exports.cosAPI = cosAPI;
-exports.cosUtil = cosUtil;
-exports.cosConfig = cosConfig;
+exports.cosConfig = {
+	AppId: AppId,
+	SecretId: SecretId,
+	SecretKey: SecretKey
+};
 
 
 

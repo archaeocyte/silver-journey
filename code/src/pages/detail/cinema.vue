@@ -7,7 +7,10 @@
 
 
 module.exports = {
-    name: 'detail-cinema'
+    name: 'detail-cinema',
+    created: function() {
+    	console.log(this.$route);
+    }
 }
 </script>
 
