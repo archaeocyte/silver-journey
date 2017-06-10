@@ -16,7 +16,7 @@ module.exports = {
     methods: {
     	fetchFilm(id) {
     		$.ajax({
-    			url: "http://wuaotian.mogzh.com/api/detail/film/" + id,
+    			url: "/api/film/detail/" + id,
     			type: "GET",
     			success: function(result) {
     				console.log(result);
