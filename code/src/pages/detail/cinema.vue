@@ -4,8 +4,6 @@
 </template>
 
 <script>
-
-
     module.exports = {
         name: 'detail-cinema',
         created: function () {
