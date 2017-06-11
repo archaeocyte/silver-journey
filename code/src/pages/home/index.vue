@@ -149,7 +149,7 @@
         width: 80px;
         height: 28px;
         margin-left: 14px;
-        font-family: PingFangSC-Medium
+        font-family: PingFangSC-Medium;
         font-size: 20px;
         color: #333333;
         letter-spacing: 0;
