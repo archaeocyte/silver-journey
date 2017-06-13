@@ -4,14 +4,12 @@
 </template>
 
 <script>
-
-
-module.exports = {
-    name: 'detail-cinema',
-    created: function() {
-    	console.log(this.$route);
+    module.exports = {
+        name: 'detail-cinema',
+        created: function () {
+            console.log(this.$route);
+        }
     }
-}
 </script>
 
 <style lang="less" scoped>

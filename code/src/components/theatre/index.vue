@@ -21,7 +21,7 @@
             <div id='price'>
                 30.8元起
             </div>
-            <div id='buy'>
+            <div id='buy' @click="onBuyButtonClick">
             选座购票
             </div>
         </div>
@@ -33,7 +33,11 @@
 
 module.exports = {
     name: 'theatre',
-    
+    methods: {
+        onBuyButtonClick() {
+          this.$router.push('/main/detail/cinema/123');
+        }
+    }
 }
 </script>
 
@@ -63,7 +67,7 @@ module.exports = {
         width: 20px;
         height: 22px;
         float: left;
-       
+
     }
     #address_word {
         width: 433px;
@@ -75,7 +79,7 @@ module.exports = {
         line-height:24px;
         text-align:left;
         margin-left: 16px;
-    }    
+    }
 }
 
 #service {

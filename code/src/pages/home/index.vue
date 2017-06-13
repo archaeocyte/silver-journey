@@ -1,12 +1,12 @@
 <template>
     <div id='home-index'>
         <div id='lunbo'>
-        	<options></options>
+            <options></options>
         </div>
         <div id='hot'>
             <div id='hot-wrapper'>
                 <div id='topic'>
-                    <img src='../../assets/images/index/fire.png' />
+                    <img src='../../assets/images/index/fire.png'/>
                     <span>正在热映</span>
                 </div>
                 <div id='view'>
@@ -15,38 +15,38 @@
                     <show-row v-show='show'></show-row>
                 </div>
                 <div id='more' @click="addRows" v-show='down'>
-			        <img src='../../assets/images/index/arrow.png' />
-			        <span>更多</span>
-			    </div>
-			    <div id='up' v-show='up'>
-				    <span>已无更多</span>
-			        <div id="up_center" @click="deleteRows">
-				        <img src='../../assets/images/index/up.png' />
-				        <span>收起</span>
-			        </div>
-			    </div>
+                    <img src='../../assets/images/index/arrow.png'/>
+                    <span>更多</span>
+                </div>
+                <div id='up' v-show='up'>
+                    <span>已无更多</span>
+                    <div id="up_center" @click="deleteRows">
+                        <img src='../../assets/images/index/up.png'/>
+                        <span>收起</span>
+                    </div>
+                </div>
             </div>
         </div>
         <div id='will'>
-        	<div id='titleon'>
-        		<img src='../../assets/images/index/todoicon.png' />
-            	<span>即将上映</span>
+            <div id='titleon'>
+                <img src='../../assets/images/index/todoicon.png'/>
+                <span>即将上映</span>
             </div>
-        	<Options></Options>
+            <Options></Options>
         </div>
         <div id='nearby'>
             <div id='nearby-wrapper'>
                 <div id='top'>
-                    <img src='../../assets/images/index/loc.png' />
+                    <img src='../../assets/images/index/loc.png'/>
                     <span>附近影院</span>
                 </div>
                 <div id='store'>
-			            <theatre></theatre>
-			            <img src='../../assets/images/index/line.png' />
-			            <theatre></theatre>
-			            <img src='../../assets/images/index/line.png' />
-			            <theatre></theatre>
-			    </div>
+                    <theatre></theatre>
+                    <img src='../../assets/images/index/line.png'/>
+                    <theatre></theatre>
+                    <img src='../../assets/images/index/line.png'/>
+                    <theatre></theatre>
+                </div>
             </div>
         </div>
     </div>
@@ -55,211 +55,227 @@
 <script>
 
 
-
-module.exports = {
-    name: 'home-index',
-    data() {
-        return {
-            show: false,
-            down: true,
-            up: false
-        };
-    },
-    methods: {
-        addRows: function() {
-            this.show = true;
-            this.down = false;
-            this.up = true;
+    module.exports = {
+        name: 'home-index',
+        data() {
+            return {
+                show: false,
+                down: true,
+                up: false
+            };
         },
-        deleteRows: function() {
-            this.show = false;
-            this.down = true;
-            this.up = false;
+        methods: {
+            addRows: function () {
+                this.show = true;
+                this.down = false;
+                this.up = true;
+            },
+            deleteRows: function () {
+                this.show = false;
+                this.down = true;
+                this.up = false;
+            }
+
+        },
+        components: {
+            "show-row": require("../../components/show-row/index.vue"),
+            "theatre": require("../../components/theatre/index.vue"),
+            'options': require("../../components/autoswiper/index.vue"),
+            'Options': require("../../components/buttonswiper/index.vue"),
+
         }
-
-    },
-    components: {
-        "show-row": require("../../components/show-row/index.vue"),
-        "theatre": require("../../components/theatre/index.vue"),
-    	'options':require("../../components/autoswiper/index.vue"),
-    	'Options':require("../../components/buttonswiper/index.vue"),
-
     }
-}
 </script>
 
 <style lang="less" scoped>
-#lunbo {
-	background-color: blue;
-	width: 100%;
-	height: 400px;
-}
+    #lunbo {
+        background-color: blue;
+        width: 100%;
+        height: 400px;
+    }
 
-#hot, #nearby {
-	width: 100%;
-}
+    #hot, #nearby {
+        width: 100%;
+    }
 
-#hot-wrapper, #nearby-wrapper {
-	width: 980px;
-	margin: 0 auto;
-}
+    #hot-wrapper, #nearby-wrapper {
+        width: 980px;
+        margin: 0 auto;
+    }
 
-#titleon {
-	width: 980px;
-	height: 30px;
-	line-height: 30px;
-	margin:0 auto;
-	text-align:center;
-	margin-bottom:60px;
-	img {
-		width: 30px;
-	    height: 30px;
-	    float:left;
-	}
-	span {
-		float:left;
-		margin-top:5px;
-		margin-left:15px;
-		width: 80px;
-	    height: 24px;
-		font-family:PingFangSC-Medium;
-		font-size:20px;
-		color:#333333;
-		letter-spacing:0;
-		line-height:24px;
-		text-align:left;
-	}
-}
+    #titleon {
+        width: 980px;
+        height: 30px;
+        line-height: 30px;
+        margin: 0 auto;
+        text-align: center;
+        margin-bottom: 60px;
 
+    img {
+        width: 30px;
+        height: 30px;
+        float: left;
+    }
 
-#topic {
-    width: 100%;
-	height: 30px;
-	line-height: 30px;
-	margin-top: 59px;
-	img {
-	    width: 30px;
-	    height: 30px;
-	    float: left;
-	}
-	span {
-	    width: 80px;
-	    height: 28px;
-	    margin-left: 14px;
-	    font-family: PingFangSC-Medium;
+    span {
+        float: left;
+        margin-top: 5px;
+        margin-left: 15px;
+        width: 80px;
+        height: 24px;
+        font-family: PingFangSC-Medium;
+        font-size: 20px;
+        color: #333333;
+        letter-spacing: 0;
+        line-height: 24px;
+        text-align: left;
+    }
+
+    }
+
+    #topic {
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
+        margin-top: 59px;
+
+    img {
+        width: 30px;
+        height: 30px;
+        float: left;
+    }
+
+    span {
+        width: 80px;
+        height: 28px;
+        margin-left: 14px;
+        font-family: PingFangSC-Medium;
         font-size: 20px;
         color: #333333;
         letter-spacing: 0;
         text-align: left;
         display: inline-block;
-	}
-}
+    }
 
-#view {
-	width: 100%;
-	margin-top: 48px;
-}
+    }
 
-#more {
-	height: 20px;
-	width: 100px;
-	margin: 0 auto;
-	margin-top: 41px;
-	margin-bottom: 50px;
-	cursor: pointer;
-	img {
-	    width: 20px;
-	    height: 20px;
-	    float: left;
-	}
-	span {
-	    font-family: PingFangSC-Medium;
+    #view {
+        width: 100%;
+        margin-top: 48px;
+    }
+
+    #more {
+        height: 20px;
+        width: 100px;
+        margin: 0 auto;
+        margin-top: 41px;
+        margin-bottom: 50px;
+        cursor: pointer;
+
+    img {
+        width: 20px;
+        height: 20px;
+        float: left;
+    }
+
+    span {
+        font-family: PingFangSC-Medium;
         font-size: 16px;
         color: #333333;
         letter-spacing: 0;
         text-align: left;
         margin-left: 15px;
-	}
-}
+    }
 
-#up {
-	height: 25px;
-	width: 100%;
-	margin-top: 41px;
-	margin-bottom: 50px;
-	span {
-	    font-family:PingFangSC-Medium;
-		font-size:18px;
-		color:#999999;
-		letter-spacing:0;
-		text-align:left;
-		float: left;
-	}
-	#up_center {
+    }
+
+    #up {
+        height: 25px;
+        width: 100%;
+        margin-top: 41px;
+        margin-bottom: 50px;
+
+    span {
+        font-family: PingFangSC-Medium;
+        font-size: 18px;
+        color: #999999;
+        letter-spacing: 0;
+        text-align: left;
+        float: left;
+    }
+
+    #up_center {
         height: 20px;
-	    width: 100px;
-	    margin: 0 auto;
-	    cursor: pointer;
-	    img {
-		    width: 20px;
-		    height: 20px;
-		    float: left;
-		}
-		span {
-		    font-family: PingFangSC-Medium;
-	        font-size: 16px;
-	        color: #333333;
-	        letter-spacing: 0;
-	        text-align: left;
-	        margin-left: 15px;
-		}
+        width: 100px;
+        margin: 0 auto;
+        cursor: pointer;
 
-	}
-	
-}
+    img {
+        width: 20px;
+        height: 20px;
+        float: left;
+    }
 
-#will {
-	height: 400px;
-	text-align:center;
-}
+    span {
+        font-family: PingFangSC-Medium;
+        font-size: 16px;
+        color: #333333;
+        letter-spacing: 0;
+        text-align: left;
+        margin-left: 15px;
+    }
 
-#top {
-    width: 100%;
-	height: 30px;
-	line-height: 30px;
-	margin-top: 59px;
-	img {
-	    width: 26px;
-	    height: 30px;
-	    float: left;
-	}
-	span {
-	    width: 80px;
-	    height: 24px;
-	    margin-left: 32px;
-	    font-family: PingFangSC-Medium;
+    }
+
+    }
+
+    #will {
+        height: 400px;
+        text-align: center;
+    }
+
+    #top {
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
+        margin-top: 59px;
+
+    img {
+        width: 26px;
+        height: 30px;
+        float: left;
+    }
+
+    span {
+        width: 80px;
+        height: 24px;
+        margin-left: 32px;
+        font-family: PingFangSC-Medium;
         font-size: 20px;
         color: #333333;
         letter-spacing: 0;
         text-align: left;
         display: inline-block;
-	}
-}
+    }
 
-#store {
-	width: 100%;
-	margin-top: 69px;
-	img {
-	    width: 979px;
-	    height: 2px;
-	    margin-top: 20px;
-	    margin-bottom: 38px;
-	}
-}
+    }
 
-#nearby {
-	margin-top: 100px;
-	margin-bottom: 101px;
-}
+    #store {
+        width: 100%;
+        margin-top: 69px;
+
+    img {
+        width: 979px;
+        height: 2px;
+        margin-top: 20px;
+        margin-bottom: 38px;
+    }
+
+    }
+
+    #nearby {
+        margin-top: 100px;
+        margin-bottom: 101px;
+    }
 
 </style>

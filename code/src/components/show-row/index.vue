@@ -1,5 +1,5 @@
 <template>
-    <div id='show-row'>
+    <div id='show-row' @click="onClick">
         <div class='item'>
             <img class='pic' :src='picOne' style='height:343.25px; width:256px' />
             <img class='hide' :src='hide' @mouseenter='word' @mouseleave='recovery'/>
@@ -72,6 +72,9 @@ module.exports = {
             if (obj.getElementsByClassName('word')[0]) {
                 obj.getElementsByClassName('word')[0].style.opacity = '100';
             }
+        },
+        onClick() {
+          this.$router.push('/main/detail/film/123');
         }
     }
 }
