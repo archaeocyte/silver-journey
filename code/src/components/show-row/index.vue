@@ -74,10 +74,10 @@ module.exports = {
             }
         },
         jump_one: function() {
-            this.$router.push('/main/detail/film/1');
+            this.$router.push('/main/detail/film/2');
         },
         jump: function() {
-            this.$router.push('/main/detail/film/2');
+            this.$router.push('/main/detail/film/1');
         }
     }
 }

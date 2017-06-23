@@ -1,6 +1,6 @@
 <template>
     <div id='home-index'>
-        <div id='lunbo'>
+        <div id='lunbo' @click='jump'>
             <options></options>
         </div>
         <div id='hot'>
@@ -74,6 +74,9 @@
                 this.show = false;
                 this.down = true;
                 this.up = false;
+            },
+            jump: function() {
+                this.$router.push('/main/detail/film/2');
             }
 
         },
