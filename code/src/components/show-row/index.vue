@@ -1,6 +1,6 @@
 <template>
-    <div id='show-row' @click="onClick">
-        <div class='item'>
+    <div id='show-row'>
+        <div class='item' @click='jump_one'>
             <img class='pic' :src='picOne' style='height:343.25px; width:256px' />
             <img class='hide' :src='hide' @mouseenter='word' @mouseleave='recovery'/>
             <div class='word' @mouseenter='word'>
@@ -15,21 +15,21 @@
             选座购票
             </div>
         </div>
-        <div class='item'>
+        <div class='item' @click='jump'>
             <img class='pic' :src='picTwo' />
             <img class='hide' :src='hide' @mouseenter='word' @mouseleave='recovery'/>
             <div class='choose' @mouseenter='enter' @mouseleave='leave'>
             选座购票
             </div>
         </div>
-        <div class='item'>
+        <div class='item' @click='jump'>
             <img class='pic' :src='picTwo' />
             <img class='hide' :src='hide' @mouseenter='word' @mouseleave='recovery'/>
             <div class='choose' @mouseenter='enter' @mouseleave='leave'>
             选座购票
             </div>
         </div>
-        <div class='item'>
+        <div class='item' @click='jump'>
             <img class='pic' :src='picTwo' />
             <img class='hide' :src='hide' @mouseenter='word' @mouseleave='recovery'/>
             <div class='choose' @mouseenter='enter' @mouseleave='leave'>
@@ -73,8 +73,11 @@ module.exports = {
                 obj.getElementsByClassName('word')[0].style.opacity = '100';
             }
         },
-        onClick() {
-          this.$router.push('/main/detail/film/123');
+        jump_one: function() {
+            this.$router.push('/main/detail/film/1');
+        },
+        jump: function() {
+            this.$router.push('/main/detail/film/2');
         }
     }
 }
