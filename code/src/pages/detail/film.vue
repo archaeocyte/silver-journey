@@ -236,7 +236,6 @@ module.exports = {
         }
     },
     components: {
-    	"login-window": require("../../components/login-window/index.vue"),
     	"rate-rect": require("../../components/rate-rect/index.vue"),
         "user": require("../../components/user/index.vue"),
         "comments-onfilm": require("../../components/comments-onfilm/index.vue")

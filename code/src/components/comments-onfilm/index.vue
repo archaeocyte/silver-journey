@@ -1,5 +1,5 @@
 <template>
-	<div id='comments-onfilm'>
+    <div id='comments-onfilm'>
         <div id='user'>
             <img id='portrait' src='../../assets/images/cinema/critic-portrait.png' />
         </div>
@@ -30,10 +30,8 @@
 </template>
 
 <script>
-
 var clike_t = 0;
 var cdislike_t = 0;
-
 module.exports = {
     name: 'comments-onfilm',
     data () {
@@ -49,30 +47,29 @@ module.exports = {
         };
         
     },
-    method: {
+    methods: {
         clike: function () {
             // click LIKE, number++
             if (clike_t == 0) {
-                this.likes += 1
+                this.likes += 1;
                 clike_t = 1;
             } 
             // cancel click, number--
             else if (clike_t == 1) {
-                this.likes -= 1
+                this.likes -= 1;
                 clike_t = 0;
             }
-                alert("?")
-
+                alert("?");
         },
         cdislike: function () {
             // click DISLIKE, number++
             if (cdislike_t == 0) {
-                this.dislikes += 1
+                this.dislikes += 1;
                 cdislike_t = 1;
             } 
             // cancel click, number--
             else if (cdislike_t == 1) {
-                this.dislikes -= 1
+                this.dislikes -= 1;
                 cdislike_t = 0;
             }
         }
@@ -84,34 +81,28 @@ module.exports = {
 </script>
 
 <style lang="less" scoped>
-
 #comments-onfilm {
     margin-top: 60px;
     height: 237px;
 }
-
 #user {
     width: 87px;
     height: 237px;
     float: left;
 }
-
 #portrait {
     width: 60px;
     height: 60px;
     margin-top: 19px;
 }
-
 #portrait:hover {
     cursor: pointer;
 }
-
 #right-comment {
     /*margin: -159px 0px 0px 90px;*/
     float: right;
     width: 890px;
 }
-
 #others-rate-rect {
     margin: -219px 0px 0px 25px;
     span {
@@ -124,27 +115,21 @@ module.exports = {
         top: -2px;
     }
 }
-
 .ostars {
     width: 20px;
     height: 20px;
     margin-right: 15px;
     cursor: pointer;
 }
-
-
 #critic-name {
     color:#666666;
     margin-right: 20px;
     width: auto;
     cursor: pointer;
 }
-
 #mark {
     color:#f57905;
 }
-
-
 #comment-rect {
     margin: 25px 0px 0px 34px;
     p {
@@ -155,7 +140,6 @@ module.exports = {
         text-align:left;
     }
 }
-
 p {
     width: 822px;
     font-family:PingFangSC-Regular;
@@ -165,7 +149,6 @@ p {
     text-align:left;
     margin-top: -10px;
 }
-
 #like-or-not {
     margin-left: 754px;
     margin-top: 30px;
@@ -177,7 +160,6 @@ p {
         top: -3px;
     }
 }
-
 span {
     font-family:PingFangSC-Regular;
     font-size:18px;
@@ -187,14 +169,11 @@ span {
     position: relative;
     top: -3px;
 }
-
 #like-num {
     color:#f57905;
     margin-right: 10px;
 }
-
 #dislike-num {
     color:#999999;
 }
-
 </style>
