@@ -8,7 +8,7 @@
 
             <div id='others-rate-rect'>
                 <span id='critic-name'>AngelineSL</span>
-                <img id='1' class='ostars' :src='goldenURL' v-on:click="change"/>
+                <img id='1' class='ostars' :src='goldenURL' />
                 <img id='2' class='ostars' :src='goldenURL' />
                 <img id='3' class='ostars' :src='goldenURL' />
                 <img id='4' class='ostars' :src='goldenURL' />
@@ -17,13 +17,13 @@
             </div>
 
             <div id='comment-rect'>
-                <p id='comment-content'>环境不错，设施挺齐全的</p>
+                <p id='comment-content'>{{comment}}</p>
             </div>
             <div id='like-or-not'>
-                <img src='../../assets/images/cinema/like.png' />
-                <span id='like-num'>99</span>
-                <img src='../../assets/images/cinema/dislike.png' />
-                <span id='dislike-num'>3</span>
+                <img src='../../assets/images/cinema/like.png' @click="clike" />
+                <span id='like-num'>{{likes}}</span>
+                <img src='../../assets/images/cinema/dislike.png' @click="cdislike" />
+                <span id='dislike-num'>{{dislikes}}</span>
             </div>
         </div>
     </div>
@@ -31,16 +31,49 @@
 
 <script>
 
+var clike_t = 0;
+var cdislike_t = 0;
 
 module.exports = {
     name: 'others-comments',
     data () {
+        this.likes = 99;
+        this.dislikes = 3;
         return {
+            likes: this.likes,
+            dislikes: this.dislikes,
+            comment: "环境不错，设施挺齐全的",
             grayURL: require('../../assets/images/cinema/halfStar.png'),
             goldenURL: require('../../assets/images/cinema/goldenStar.png'),
             halfURL: require('../../assets/images/cinema/halfStar.png')
         };
         
+    },
+    method: {
+        clike: function () {
+            // click LIKE, number++
+            if (clike_t == 0) {
+                this.likes += 1
+                clike_t = 1;
+            } 
+            // cancel click, number--
+            else if (clike_t == 1) {
+                this.likes -= 1
+                clike_t = 0;
+            }
+        },
+        cdislike: function () {
+            // click DISLIKE, number++
+            if (cdislike_t == 0) {
+                this.dislikes += 1
+                cdislike_t = 1;
+            } 
+            // cancel click, number--
+            else if (cdislike_t == 1) {
+                this.dislikes -= 1
+                cdislike_t = 0;
+            }
+        }
     },
     components: {
         
@@ -77,7 +110,7 @@ module.exports = {
 }
 
 #others-rate-rect {
-    margin: -141px 0px 0px 34px;
+    margin: -141px 0px 0px 25px;
     span {
         font-family:PingFangSC-Regular;
         font-size:20px;

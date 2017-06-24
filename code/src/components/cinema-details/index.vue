@@ -1,6 +1,6 @@
 <template>
-    <div id='cinema-details'>
-    <div class='nav-bar-wrapper'>
+	<div id='cinema-details'>
+	<div class='nav-bar-wrapper'>
 
         <router-box></router-box>
 
@@ -62,10 +62,11 @@
                     <rate-rect id='users'></rate-rect>
                     <img id='line' src='../../assets/images/cinema/line.png' />
                     <div id='comment-rect'>
-                        <textarea id='comment-content'>写下您的评论…</textarea>
+                        <textarea id='comment-content' v-model="comments" @focus="getFocus" @blur="loseFocus" @input="inputting">{{comments}}</textarea>
+                        <span id="hint">写下您的评论…</span>
                     </div>
                     <div id='word-limit'>
-                        <span id='word-count'>0/200</span>
+                        <span id='word-count'>{{comments.length}}/200</span>
                     </div>
                 </div>
                 <div id='comment-button'>
@@ -87,20 +88,44 @@
 
             <div id='blank233h'></div>
         </div>
-    </div>
+        </div>
     </div>
 
 </template>
 
 <script>
+
+
+
 module.exports = {
     name: 'cinema-details',
     data() {
+        this.comments = "";
+        return {
+            comments: this.comments
+        };
     },
     methods: {
+        getFocus: function () {
+            document.getElementById("hint").style.display = "none"
+            
+        },
+
+        loseFocus: function() {
+            if (this.comments == "")
+                document.getElementById("hint").style.display = "inline"
+        },
+
+        inputting: function () {
+            if (this.comments.length > 200) {
+                document.getElementById('word-count').style.color = '#f57905'
+            } else {
+                document.getElementById('word-count').style.color = '#999999'
+            }
+        }
     },
     components: {
-        "router-box": require("../router-box/index.vue"),
+    	"router-box": require("../router-box/index.vue"),
         "rate-rect": require("../rate-rect/index.vue"),
         "user": require("../user/index.vue"),
         "others-comments": require("../others-comments/index.vue"),
@@ -115,13 +140,18 @@ module.exports = {
     margin: 0 auto;
     height: 100%;
 }
+
+
+
 #cinema-detail {
     margin-top: 51px;
 }
+
 #left {
     width: 360px;
     height: 331px;
 }
+
 #cinema-name {
     font-family:PingFangSC-Medium;
     font-size:20px;
@@ -129,18 +159,22 @@ module.exports = {
     letter-spacing:-0.4px;
     text-align:left;
 }
+
 #picture {
     margin-top: 18px;
 }
+
 #grayBG {
     background:#dcdcdc;
     width:360px;
     height:285px;
 }
+
 @font-face{
     font-family: "HoboStd";
     src: url('../../assets/fonts/hobostd___.otf');
 }
+
 #silverJourney {
     font-family: HoboStd;
     font-size:36px;
@@ -149,15 +183,18 @@ module.exports = {
     text-align:left;
     margin-bottom: 7px;
 }
+
 #s {   
     color:#999999;
 }
+
 #o {
     width: 24px;
     height: 24px;
     margin-left: -6px;
     margin-right: -6px;
 }
+
 #slogan {
     font-family:PingFangSC-Regular;
     font-size:18px;
@@ -166,13 +203,16 @@ module.exports = {
     text-align:left;
     margin-left: 30px;
 }
+
 #watermark {
     margin: -189px 0px 0px 72px;
 }
+
 #right {
     height: 331px;
     margin: -331px 0px 0px 410px;
 }
+
 #rate {
     font-family:PingFangSC-Medium;
     font-size:20px;
@@ -180,18 +220,22 @@ module.exports = {
     letter-spacing:-0.4px;
     text-align:left;
 }
+
 #loc-info {
     height: 24px;
     margin-top: 37px;
 }
+
 #contact-info {
     height: 20px;
     margin-top: 42px;
 }
+
 #other-infos-boxes {
     height: 24px;
     margin-top: 40px;
 }
+
 .tag {
     font-family:PingFangSC-Regular;
     font-size:14px;
@@ -200,6 +244,7 @@ module.exports = {
     text-align:left;
     margin-left: 20px;
 }
+
 .detail {
     font-family:PingFangSC-Regular;
     font-size:14px;
@@ -208,6 +253,7 @@ module.exports = {
     text-align:left;
     margin-left: 20px;
 }
+
 #item {
     font-family:PingFangSC-Medium;
     font-size:14px;
@@ -218,52 +264,63 @@ module.exports = {
     margin-top: -25px;
     margin-bottom: 25px;
     span {
-        width: 47px;
+    	width: 47px;
     }
 }
+
 .round-box {
     width:51px;
     height:22px;
     margin-right: 14px;
 }
+
 #loc-img {
     position: relative;
     top: 8px;
 }
+
 #cont-img {
     position: relative;
     top: 5px;
 }
+
 #snack {
     margin-left: 11px;
     margin-right: 29px;
 }
+
 /* session */
 #session {
     background-image:linear-gradient(-180deg, #615951 0%, #393027 99%);
     width:auto;
+    height:100px;
     margin-top: 101px;
 }
+
 #temp-todo {
     font-family:PingFangSC-Medium;
     font-size:30px;
     color:white;
     text-align:center;
 }
+
 /* rate-and-comment */
-.rate-and-comment { 
+.rate-and-comment {	
     background:#f5f5f5;
     height: 100%;
     margin-top: 2px;
 }
+
 #blank78h {
     height: 78px;
 }
+
 .title-img {
     position: relative;
     top: 5px;
     margin-right: 15px;
 }
+
 .title {
     font-family:PingFangSC-Regular;
     font-size:20px;
@@ -271,27 +328,33 @@ module.exports = {
     letter-spacing:0.37px;
     text-align:left;
 }
+
 #comment-area {
     margin-top: 53px;
     height: 250px;
 }
+
 #right-comment {
     margin: -250px 0px 0px 93px;
     width:890px;
     height:250px;
 }
+
 #users {
     margin: -194px 0px 0px 35px;
 }
+
 #comment-button {
-    background:#f57905;
+	background:#f57905;
     margin: -40px 0px 0px 900px;
     height: 40px;
     cursor: pointer;
 }
+
 #comment-button:hover {
     background-color: #C86203;
 }
+
 #btn-content {
     font-family:PingFangSC-Regular;
     font-size:16px;
@@ -302,13 +365,26 @@ module.exports = {
     top: 10px;
     left: 24px;
 }
+
 #line {
     margin: 0px 0px 0px 35px;
     width:310px;
 }
+
 #comment-rect {
     margin: 14px 0px 0px 35px;
+    span {
+        font-family:PingFangSC-Regular;
+        font-size:16px;
+        color:#999999;
+        letter-spacing:0.3px;
+        text-align:left;
+        margin-left: -827px;
+        position: relative;
+        top: -75px;
+    }
 }
+
 #comment-content {
     border:1px solid white;
     height: 88px;
@@ -319,9 +395,11 @@ module.exports = {
     letter-spacing:0.3px;
     text-align:left;
 }
+
 #word-limit {
     margin-left: 826px;
 }
+
 #word-count {
     font-family:PingFangSCRegular;
     font-size:16px;
@@ -329,9 +407,11 @@ module.exports = {
     letter-spacing:0.3px;
     text-align:left;
 }
+
 #blank60h {
     height: 60px;
 }
+
 #blank233h {
     height: 233px;
 }
