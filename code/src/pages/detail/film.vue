@@ -44,7 +44,37 @@
                 </div>
                 <div id='actor'>
                     <span id='zhuyan'>主演：</span>
-                    <Actors></Actors>
+                    <div id='name'>
+                    	<div class='head'>
+                    	    <img src='http://silverjourney-1253262853.cosgz.myqcloud.com/picture/actor/fandisaier.jpg' />
+                    	    <div class='bottom'>
+                    	    {{name_1}}
+                    	    </div>
+                    	    <div class='bottom'>
+                    	    饰
+                    	    </div>
+                    	    <div class='bottom'>
+                    	    {{role_1}}
+                    	    </div>
+
+                    	</div>
+                    	<div class='head'>
+                    	    <img src='http://silverjourney-1253262853.cosgz.myqcloud.com/picture/actor/daoenqiangsen.jpg' />
+                    	    <div class='bottom'>
+                    	    {{name_2}}
+                    	    </div>
+                    	    <div class='bottom'>
+                    	    饰
+                    	    </div>
+                    	    <div class='bottom'>
+                    	    {{role_1}}
+                    	    </div>
+                    	</div>
+                    </div>
+                    <div id='arrow'>
+                    	<img src='../../assets/images/film/turnleft.png' />
+                    	<img src='../../assets/images/film/turnright.png' />
+                    </div>
                 </div>
                 <div id='type'>
 	                <span>{{type_one}}  {{type_two}}  {{type_three}}</span> |
@@ -68,7 +98,7 @@ module.exports = {
     	this.fetchFilm(id);
     },
     components: {
-        'Actors': require("../../components/buttonswiper/film.vue")
+        //'Actors': require("../../components/buttonswiper/film.vue")
     },
     data() {
     	return {
@@ -85,7 +115,11 @@ module.exports = {
             ad: '',
             director: '',
             language: '',
-            showtime: '2017年4月14日上映'
+            showtime: '2017年4月14日上映',
+            name_1: '',
+            name_2: '',
+            role_1: '',
+            role_2: ''
     	};
     },
     methods: {
@@ -109,6 +143,10 @@ module.exports = {
     				this.ad = result.data.film.slogan;
     				this.director = result.data.film.director.name;
     				this.language = result.data.film.languages[0].name;
+    				this.name_1 = result.data.film.actors[0].name;
+    				this.name_2 = result.data.film.actors[1].name;
+    				this.role_1 = result.data.film.actors[0].role_name;
+    				this.role_2 = result.data.film.actors[1].role_name;
     				if (id == 1) {
 			    		var a = document.getElementById('speed_pic');
 			    		var b = document.getElementById('xiyou_pic');
@@ -323,6 +361,37 @@ module.exports = {
 				color:#666666;
 				letter-spacing:0;
 				text-align:left;
+				float: left;
+        	}
+        	#name {
+        		height: 100%;
+        		width: 400px;
+        		float: left;
+        		.head {
+        			float: left;
+        			width: 120px;
+        			height: 100%;
+        			margin-left: 20px;
+        			img {
+	        			width: 50px;
+	        			height: 50px;
+	        			border-radius: 50%;
+	        			border: 1px solid white;
+	        		}
+	        		.bottom {
+	        			color: #999999;
+	        			font-size: 14px;
+	        		}
+
+        		}
+        	}
+        	#arrow {
+        		height: 100%;
+        		width: 100px;
+        		float: left;
+        		img {
+        			width: 25px;
+        		}
         	}
         }
         #type {
