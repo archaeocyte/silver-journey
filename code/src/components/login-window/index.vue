@@ -59,6 +59,7 @@ module.exports = {
             
         },
         login: function  () {
+
             if (this.username.length == 0) {
                 document.getElementById('emptyName').style.opacity = 1
             } else {
@@ -225,10 +226,5 @@ form {
     cursor: pointer;
 }
 
-#forgetPsw {
-    margin-left: 130px;
-    cursor: pointer;
-
-}
 
 </style>

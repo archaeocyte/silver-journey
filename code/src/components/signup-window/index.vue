@@ -22,7 +22,7 @@
             密码:
             <input type="password" name="password" v-model='password'>
             <br/>
-            <span id='wrongPsw' class='error'>密码必须由6—20位字母、数字、符号组成</span>
+            <span id='invalidPsw' class='error'>密码必须由6—20位字母、数字、符号组成</span>
             <br/>
             <span id='confm-line'>确认密码:
             <input type="password" name="confirm" v-model='confirm'></span>
@@ -69,9 +69,9 @@ module.exports = {
                 document.getElementById('invalidName').style.opacity = 0;
             }
             if (this.password.length < 6 || this.password.length > 20) {
-                document.getElementById('wrongPsw').style.opacity = 1;
+                document.getElementById('invalidPsw').style.opacity = 1;
             } else {
-                document.getElementById('wrongPsw').style.opacity = 0;
+                document.getElementById('invalidPsw').style.opacity = 0;
 
             }
             if (this.confirm != this.password) {
@@ -189,7 +189,7 @@ form {
         position: relative;
         left: 25px;
     }
-    #wrongPsw {
+    #invalidPsw {
         position: relative;
         left: 50px;
     }
