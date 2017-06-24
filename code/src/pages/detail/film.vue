@@ -46,7 +46,8 @@
                     <span id='zhuyan'>主演：</span>
                     <div id='name'>
                     	<div class='head'>
-                    	    <img src='http://silverjourney-1253262853.cosgz.myqcloud.com/picture/actor/fandisaier.jpg' />
+                    	    <img src='http://silverjourney-1253262853.cosgz.myqcloud.com/picture/actor/fandisaier.jpg' id='pic_1'/>
+                    	    <img src='http://silverjourney-1253262853.cosgz.myqcloud.com/picture/actor/zhouxingchi.jpg' id='pic_2'/>
                     	    <div class='bottom'>
                     	    {{name_1}}
                     	    </div>
@@ -59,7 +60,8 @@
 
                     	</div>
                     	<div class='head'>
-                    	    <img src='http://silverjourney-1253262853.cosgz.myqcloud.com/picture/actor/daoenqiangsen.jpg' />
+                    	    <img src='http://silverjourney-1253262853.cosgz.myqcloud.com/picture/actor/daoenqiangsen.jpg' id='pic_3'/>
+                    	    <img src='http://silverjourney-1253262853.cosgz.myqcloud.com/picture/actor/zhuyin.jpg' id='pic_4'/>
                     	    <div class='bottom'>
                     	    {{name_2}}
                     	    </div>
@@ -200,6 +202,15 @@ module.exports = {
 			    		var d = document.getElementById('xiyou_img');
 			    		c.style.opacity = '0';
 			    		d.style.opacity = '100';
+			    		var e = document.getElementById('pic_2');
+			    		var f = document.getElementById('pic_4');
+			    		var g = document.getElementById('pic_1');
+			    		var h = document.getElementById('pic_3');
+			    		g.style.display = 'none';
+			    		h.style.display = 'none';
+			    		e.style.display = 'inline-block';
+			    		f.style.display = 'inline-block';
+			    		
 			    	} else if (id == 2) {
 			    		var a = document.getElementById('speed_pic');
 			    		var b = document.getElementById('xiyou_pic');
@@ -209,6 +220,14 @@ module.exports = {
 			    		var d = document.getElementById('xiyou_img');
 			    		d.style.opacity = '0';
 			    		c.style.opacity = '100';
+			    		var e = document.getElementById('pic_2');
+			    		var f = document.getElementById('pic_4');
+			    		var g = document.getElementById('pic_1');
+			    		var h = document.getElementById('pic_3');
+			    		e.style.display = 'none';
+			    		f.style.display = 'none';
+			    		g.style.display = 'inline-block';
+			    		h.style.display = 'inline-block';
 			    	}
     			}.bind(self)
     		});
@@ -433,7 +452,7 @@ module.exports = {
         		float: left;
         		.head {
         			float: left;
-        			width: 80px;
+        			width: 120px;
         			height: 100%;
         			margin-left: 20px;
         			img {
@@ -441,6 +460,7 @@ module.exports = {
 	        			height: 50px;
 	        			border-radius: 50%;
 	        			border: 1px solid white;
+	        			display: none;
 	        		}
 	        		.bottom {
 	        			color: #999999;
