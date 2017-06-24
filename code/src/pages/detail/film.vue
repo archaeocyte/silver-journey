@@ -86,6 +86,11 @@
                 </div>
             </div>
         </div>
+        <div id="session">
+        	<div id="suibian">
+    			<block></block>
+    		</div>
+    	</div>
         <div class='rate-and-comment'>
 	        <div id='blank78h'></div>
 	        <div class='nav-bar-wrapper'>
@@ -257,12 +262,20 @@ module.exports = {
     components: {
     	"rate-rect": require("../../components/rate-rect/index.vue"),
         "user": require("../../components/user/index.vue"),
-        "comments-onfilm": require("../../components/comments-onfilm/index.vue")
+        "comments-onfilm": require("../../components/comments-onfilm/index.vue"),
+    	'block':require('../../components/film-details/block.vue')
+        
     }
 }
 </script>
 
 <style lang="less" scoped>
+#session {
+	background: url("../../assets/images/film/background.png") round;
+	#suibian {
+		background:rgba(51,51,51,0.50);
+	}
+}
 #top {
 	height: 35px;
 	width: 980px;
