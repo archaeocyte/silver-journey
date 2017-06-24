@@ -62,7 +62,7 @@ module.exports = {
 			photo:require('../../assets/images/film/photo1.png'),
 			video: require('../../assets/images/film/video1.png'),
 			play: require('../../assets/images/film/play.png'),
-			viewOn: true
+			viewOn: false
 		};
 	},
 	methods: {
@@ -249,8 +249,8 @@ module.exports = {
 				letter-spacing:0.3px;
 				text-align:left;
 				position: relative;
-				bottom: 32px;
-				right: 200px;
+				bottom: 21px;
+				right: 195px;
 			}
 			p {
 				font-family:PingFangSC-Regular;
