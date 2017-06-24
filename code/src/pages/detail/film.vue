@@ -6,7 +6,8 @@
             <span id='right'>电影详情</span>
         </div>
         <div id='poster'>
-            <img :src='pic' />
+            <img :src='pic' id='speed_pic'/>
+            <img :src='pic_two' id='xiyou_pic'/>
             <div id='wrapper'>
 	            <div id='hotting'>
 	            正在热映
@@ -14,53 +15,76 @@
 	            <div id='name'>
 	            {{filmName}}
 	            </div>
+	            <div id='duration'>
+	                <span>{{time}}分钟</span>&nbsp-
+	                <span>{{type_one}}</span>/
+	                <span>{{type_two}}</span>&nbsp-
+	                <span>{{number}}</span>
+	            </div>
+	            <div id='slogan'>
+	                <span id='mark'>"</span>
+	                <span id='ad'>{{ad}}</span>
+	            </div>
+	            <div id='select' @mouseenter='strong' @mouseleave='weak'>
+	            选座购票
+	            </div>
 	        </div>
         </div>
-        <div id='director'>
-        导演：{{director}}
-        </div>
-        <div id='actor'>
-            <span id='zhuyan'>主演：</span>
-            <div id='name'>
-            	<div class='head'>
-            	    <img src='http://silverjourney-1253262853.cosgz.myqcloud.com/picture/actor/fandisaier.jpg' />
-            	    <div class='bottom'>
-            	    {{name_1}}
-            	    </div>
-            	    <div class='bottom'>
-            	    饰
-            	    </div>
-            	    <div class='bottom'>
-            	    {{role_1}}
-            	    </div>
-
-            	</div>
-            	<div class='head'>
-            	    <img src='http://silverjourney-1253262853.cosgz.myqcloud.com/picture/actor/daoenqiangsen.jpg' />
-            	    <div class='bottom'>
-            	    {{name_2}}
-            	    </div>
-            	    <div class='bottom'>
-            	    饰
-            	    </div>
-            	    <div class='bottom'>
-            	    {{role_1}}
-            	    </div>
-            	</div>
+        <div id='desc'>
+            <div id='left'>
+                <img :src='poster_1' id='speed_img'/>
+                <img :src='poster_2' id='xiyou_img'/> 
             </div>
-            <div id='arrow'>
-            	<img src='../../assets/images/film/turnleft.png' />
-            	<img src='../../assets/images/film/turnright.png' />
+            <div id='right'>
+                <div id='score'>
+                评分： 9.2
+                </div>
+                <div id='director'>
+                导演：{{director}}
+                </div>
+                <div id='actor'>
+                    <span id='zhuyan'>主演：</span>
+                    <div id='name'>
+                    	<div class='head'>
+                    	    <img src='http://silverjourney-1253262853.cosgz.myqcloud.com/picture/actor/fandisaier.jpg' />
+                    	    <div class='bottom'>
+                    	    {{name_1}}
+                    	    </div>
+                    	    <div class='bottom'>
+                    	    饰
+                    	    </div>
+                    	    <div class='bottom'>
+                    	    {{role_1}}
+                    	    </div>
+
+                    	</div>
+                    	<div class='head'>
+                    	    <img src='http://silverjourney-1253262853.cosgz.myqcloud.com/picture/actor/daoenqiangsen.jpg' />
+                    	    <div class='bottom'>
+                    	    {{name_2}}
+                    	    </div>
+                    	    <div class='bottom'>
+                    	    饰
+                    	    </div>
+                    	    <div class='bottom'>
+                    	    {{role_1}}
+                    	    </div>
+                    	</div>
+                    </div>
+                    <div id='arrow'>
+                    	<img src='../../assets/images/film/turnleft.png' />
+                    	<img src='../../assets/images/film/turnright.png' />
+                    </div>
+                </div>
+                <div id='type'>
+	                <span>{{type_one}}  {{type_two}}  {{type_three}}</span> |
+	                <span>{{language}}</span> |
+	                <span>{{time}}分钟</span> |
+	                <span>{{showtime}}</span>
+                </div>
             </div>
         </div>
-        <div id='type'>
-            <span>{{type_one}}  {{type_two}}  {{type_three}}</span> |
-            <span>{{language}}</span> |
-            <span>{{time}}分钟</span> |
-            <span>{{showtime}}</span>
-        </div>
-
-		<div class='rate-and-comment'>
+        <div class='rate-and-comment'>
 	        <div id='blank78h'></div>
 	        <div class='nav-bar-wrapper'>
 	            <div id='rate-title-bar'>
@@ -100,11 +124,13 @@
 
 	            <div id='blank233h'></div>
 	        </div>
-	    </div>
-	</div>   
+        </div>
+    </div>
 </template>
 
 <script>
+
+
 module.exports = {
     name: 'detail-film',
     created: function() {
@@ -112,11 +138,15 @@ module.exports = {
     	console.log(id);
     	this.fetchFilm(id);
     },
+    components: {
+        //'Actors': require("../../components/buttonswiper/film.vue")
+    },
     data() {
-        this.comments = "";
+    	this.comments = "";
     	return {
     		comments: this.comments,
             pic:  require('../../assets/images/index/speed.png'),
+            filmName: '',
             pic_two: require('../../assets/images/film/xiyou.png'),
             poster_1: require('../../assets/images/index/hot_one.png'),
             poster_2: require('../../assets/images/index/hot_two.png'),
@@ -133,8 +163,7 @@ module.exports = {
             name_1: '',
             name_2: '',
             role_1: '',
-            role_2: '',
-            filmName: ''
+            role_2: ''
     	};
     },
     methods: {
@@ -145,7 +174,6 @@ module.exports = {
     			type: "GET",
     			success: function(result) {
     				console.log(result);
-    				console.log(result.data.film.name_cn);
     				this.filmName = result.data.film.name_cn;
     				this.time = result.data.film.duration;
     				this.type_one = result.data.film.types[0];
@@ -185,17 +213,20 @@ module.exports = {
     			}.bind(self)
     		});
     	},
-
+    	strong: function(event) {
+            event.target.style.opacity = '100';
+    	},
+    	weak: function(event) {
+            event.target.style.opacity = '0.8';
+    	},
     	getFocus: function () {
             document.getElementById("hint").style.display = "none"
             
         },
-
         loseFocus: function() {
             if (this.comments == "")
                 document.getElementById("hint").style.display = "inline"
         },
-
         inputting: function () {
         	if (this.comments.length > 200) {
             	document.getElementById('word-count').style.color = '#f57905'
@@ -246,6 +277,7 @@ module.exports = {
 		margin-left: 9px;
 	}
 }
+
 #poster {
 	width: 100%;
 	height: 400px;
@@ -255,6 +287,7 @@ module.exports = {
 		width: 100%;
 		height: 400px;
 		position: absolute;
+		opacity: 0;
 	}
 	#wrapper {
 		width: 980px;
@@ -275,7 +308,7 @@ module.exports = {
 			top: 80px;
 		}
 		#name {
-			width: 202px;
+			width: 350px;
 			height: 48px;
 			font-family:PingFangSC-Medium;
 			font-size:36px;
@@ -286,6 +319,64 @@ module.exports = {
 			text-align:left;
 			position: absolute;
 			top: 143px;
+		}
+		#duration {
+			width: 410px;
+			height: 25px;
+			position: absolute;
+			top: 210px;
+			font-family:PingFangSC-Medium;
+			font-size:18px;
+			color:#ffffff;
+			letter-spacing:0;
+			text-shadow:0 2px 4px rgba(0,0,0,0.50);
+			text-align:left;
+		}
+		#slogan {
+			width: 500px;
+			height: 36px;
+			position: absolute;
+			top: 255px;
+			#mark {
+				width: 34px;
+                height: 36px;
+                font-family:PingFangSC-Medium;
+				font-size:56px;
+				color:#b96719;
+				letter-spacing:0;
+				line-height:64px;
+				text-align:left;
+				margin-right: 26px;
+			}
+			#ad {
+				height: 36px;
+				width: 420px;
+				font-family:PingFangSC-Medium;
+				font-size:28px;
+				color:#ffffff;
+				letter-spacing:0;
+				line-height:36px;
+				text-shadow:0 2px 4px rgba(0,0,0,0.50);
+				text-align:left;
+				position: relative;
+				top: -15px;
+			}
+		}
+		#select {
+			width: 268px;
+			height: 81px;
+			line-height: 81px;
+			position: absolute;
+			top: 318px;
+			left: 670px;
+			background:rgba(245,120,5,0.80);
+			opacity: 0.8;
+			font-family:PingFangSC-Medium;
+			font-size:28px;
+			color:#ffffff;
+			letter-spacing:0;
+			text-align:center;
+			cursor: pointer;
 		}
 	}
 }
@@ -343,7 +434,7 @@ module.exports = {
         		float: left;
         		.head {
         			float: left;
-        			width: 120px;
+        			width: 80px;
         			height: 100%;
         			margin-left: 20px;
         			img {
@@ -377,6 +468,7 @@ module.exports = {
         }
 	}
 
+}
 
 /* rate-and-comment */
 .nav-bar-wrapper {
@@ -384,23 +476,19 @@ module.exports = {
     margin: 0 auto;
     height: 100%;
 }
-
 .rate-and-comment {	
     background:#f5f5f5;
     height: 100%;
     margin-top: 2px;
 }
-
 #blank78h {
     height: 78px;
 }
-
 .title-img {
     position: relative;
     top: 5px;
     margin-right: 15px;
 }
-
 .title {
     font-family:PingFangSC-Regular;
     font-size:20px;
@@ -408,33 +496,27 @@ module.exports = {
     letter-spacing:0.37px;
     text-align:left;
 }
-
 #comment-area {
     margin-top: 53px;
     height: 250px;
 }
-
 #right-comment {
     margin: -250px 0px 0px 93px;
     width:890px;
     height:250px;
 }
-
 #users {
     margin: -194px 0px 0px 35px;
 }
-
 #comment-button {
 	background:#f57905;
     margin: -40px 0px 0px 900px;
     height: 40px;
     cursor: pointer;
 }
-
 #comment-button:hover {
     background-color: #C86203;
 }
-
 #btn-content {
     font-family:PingFangSC-Regular;
     font-size:16px;
@@ -445,12 +527,10 @@ module.exports = {
     top: 10px;
     left: 24px;
 }
-
 #line {
     margin: 0px 0px 0px 35px;
     width:310px;
 }
-
 #comment-rect {
     margin: 14px 0px 0px 35px;
     span {
@@ -464,7 +544,6 @@ module.exports = {
         top: -75px;
     }
 }
-
 #comment-content {
     border:1px solid white;
     height: 88px;
@@ -475,11 +554,9 @@ module.exports = {
     letter-spacing:0.3px;
     text-align:left;
 }
-
 #word-limit {
     margin-left: 826px;
 }
-
 #word-count {
     font-family:PingFangSCRegular;
     font-size:16px;
@@ -487,11 +564,9 @@ module.exports = {
     letter-spacing:0.3px;
     text-align:left;
 }
-
 #blank60h {
     height: 60px;
 }
-
 #blank233h {
     height: 233px;
 }
