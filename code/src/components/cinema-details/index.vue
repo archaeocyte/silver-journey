@@ -293,7 +293,6 @@ module.exports = {
 #session {
     background-image:linear-gradient(-180deg, #615951 0%, #393027 99%);
     width:auto;
-    height:100px;
     margin-top: 101px;
 }
 
