@@ -2,9 +2,12 @@
     <div id='home-index'>
         <div id='lunbo' @click='jump'>
             <options></options>
+            
         </div>
         <div id='hot'>
             <div id='hot-wrapper'>
+                <div id='signup-btn' @click="showSignup"></div>
+                <div id='login-btn' @click="showLogin"></div>
                 <div id='topic'>
                     <img src='../../assets/images/index/fire.png'/>
                     <span>正在热映</span>
@@ -49,6 +52,8 @@
                 </div>
             </div>
         </div>
+        <signup-window></signup-window>
+        <login-window ></login-window>
     </div>
 </template>
 
@@ -77,10 +82,22 @@
             },
             jump: function() {
                 this.$router.push('/main/detail/film/2');
-            }
+            },
+            showLogin: function() {
+                document.getElementById('signup-window').style.display = "none"
+                document.getElementById('login-window').style.display = "inline"
 
+
+            },
+            showSignup: function() {
+                //alert(document.getElementById('signupWin').style.display)
+                document.getElementById('login-window').style.display = "none"
+                document.getElementById('signup-window').style.display = "inline"
+            }
         },
         components: {
+            "signup-window": require("../../components/signup-window/index.vue"),
+            "login-window": require("../../components/login-window/index.vue"),
             "show-row": require("../../components/show-row/index.vue"),
             "theatre": require("../../components/theatre/index.vue"),
             'options': require("../../components/autoswiper/index.vue"),
@@ -280,5 +297,21 @@
         margin-top: 100px;
         margin-bottom: 101px;
     }
+
+#login-btn, #signup-btn {
+    z-index: 2;
+    width: 32px;
+    height: 22px;
+    //background-color: gray;
+    float: right;
+    position: relative;
+    top: -500px;
+    cursor: pointer;
+}
+
+#login-btn {
+    position: relative;
+    left: -30px;
+}
 
 </style>
