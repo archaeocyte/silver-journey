@@ -29,7 +29,30 @@
 	            选座购票
 	            </div>
 	        </div>
-
+        </div>
+        <div id='desc'>
+            <div id='left'>
+                <img :src='poster_1' id='speed_img'/>
+                <img :src='poster_2' id='xiyou_img'/> 
+            </div>
+            <div id='right'>
+                <div id='score'>
+                评分： 9.2
+                </div>
+                <div id='director'>
+                导演：{{director}}
+                </div>
+                <div id='actor'>
+                    <span id='zhuyan'>主演：</span>
+                    <Actors></Actors>
+                </div>
+                <div id='type'>
+	                <span>{{type_one}}  {{type_two}}  {{type_three}}</span> |
+	                <span>{{language}}</span> |
+	                <span>{{time}}分钟</span> |
+	                <span>{{showtime}}</span>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -44,16 +67,25 @@ module.exports = {
     	console.log(id);
     	this.fetchFilm(id);
     },
+    components: {
+        'Actors': require("../../components/buttonswiper/film.vue")
+    },
     data() {
     	return {
             pic:  require('../../assets/images/index/speed.png'),
             pic_two: require('../../assets/images/film/xiyou.png'),
+            poster_1: require('../../assets/images/index/hot_one.png'),
+            poster_2: require('../../assets/images/index/hot_two.png'),
             filmName: '',
             time: '',
             type_one: '',
             type_two: '',
+            type_three: '',
             number: '',
-            ad: ''
+            ad: '',
+            director: '',
+            language: '',
+            showtime: '2017年4月14日上映'
     	};
     },
     methods: {
@@ -72,18 +104,29 @@ module.exports = {
     				} else {
     					this.type_two = result.data.film.types[1];
     				}
+    				this.type_three = result.data.film.types[2];
     				this.number = "广州121家影院上映2805场";
     				this.ad = result.data.film.slogan;
+    				this.director = result.data.film.director.name;
+    				this.language = result.data.film.languages[0].name;
     				if (id == 1) {
 			    		var a = document.getElementById('speed_pic');
 			    		var b = document.getElementById('xiyou_pic');
 			    		a.style.opacity = '0';
 			    		b.style.opacity = '100';
+			    		var c = document.getElementById('speed_img');
+			    		var d = document.getElementById('xiyou_img');
+			    		c.style.opacity = '0';
+			    		d.style.opacity = '100';
 			    	} else if (id == 2) {
 			    		var a = document.getElementById('speed_pic');
 			    		var b = document.getElementById('xiyou_pic');
 			    		b.style.opacity = '0';
 			    		a.style.opacity = '100';
+			    		var c = document.getElementById('speed_img');
+			    		var d = document.getElementById('xiyou_img');
+			    		d.style.opacity = '0';
+			    		c.style.opacity = '100';
 			    	}
     			}.bind(self)
     		});
@@ -233,5 +276,63 @@ module.exports = {
 			cursor: pointer;
 		}
 	}
+}
+#desc {
+	width: 980px;
+	height: 320px;
+	margin: 0 auto;
+	margin-bottom: 70px;
+	#left {	
+		width: 220px;
+        height: 320px;
+        float: left;
+		img {
+			width: 220px;
+			height: 290px;
+	        position: absolute;
+	        opacity: 0;
+		}
+	}
+	#right {
+        width: 700px;
+        height: 320px;
+        margin-left: 40px;
+        float: left;
+        #score {
+        	font-family:PingFangSC-Medium;
+			font-size:35px;
+			color:rgba(245,120,5,0.80);
+			letter-spacing:0;
+			text-align:left;
+			margin-top: 15px;
+        }
+        #director {
+            font-family:PingFangSC-Medium;
+			font-size:18px;
+			color:#666666;
+			letter-spacing:0;
+			text-align:left;
+			margin-top: 10px;
+        }
+        #actor {
+        	height: 135px;
+        	margin-top: 15px;
+        	#zhuyan {
+        		font-family:PingFangSC-Medium;
+				font-size:18px;
+				color:#666666;
+				letter-spacing:0;
+				text-align:left;
+        	}
+        }
+        #type {
+        	font-family:PingFangSC-Medium;
+			font-size:18px;
+			color:#666666;
+			letter-spacing:0;
+			text-align:left;
+        }
+	}
+
 }
 </style>
