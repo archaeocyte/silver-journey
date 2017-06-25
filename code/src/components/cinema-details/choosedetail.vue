@@ -50,18 +50,8 @@
 </template>
 
 <script>
-    import { swiper, swiperSlide } from 'vue-awesome-swiper'
- 
     export default {
     	name:'choosedetail',
-        components: {
-            swiper,
-            swiperSlide
-        },
-        data() {
-        },
-        methods: {
-        }
     }
 </script>
 

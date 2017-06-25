@@ -32,6 +32,7 @@
     import { swiper, swiperSlide } from 'vue-awesome-swiper'
  
     export default {
+        name:"total",
         components: {
             swiper,
             swiperSlide,

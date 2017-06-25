@@ -1,7 +1,7 @@
 <template>
     <div id='block'>
         <div>
-        <options></options>
+        <total></total>
         </div>
         <div>
         <options2></options2>
@@ -16,7 +16,7 @@
 module.exports = {
     name: 'block',
     components: {
-        'options':require("./choosetime.vue"),
+        'total':require("./choosetime.vue"),
         'options2':require("./choosefilm.vue"),
         'choosedetail':require("./choosedetail.vue"),
     }
