@@ -1,23 +1,23 @@
 <template>
     <div id='comments-onfilm'>
         <div id='user'>
-            <img id='portrait' src='../../assets/images/cinema/critic-portrait.png' />
+            <img id='other-portrait' src='../../assets/images/cinema/critic-portrait.png' />
         </div>
         <div id='right-comment'>
             <img src='../../assets/images/film/comment-rect.png' />
 
             <div id='others-rate-rect'>
                 <span id='critic-name'>AngelineSL</span>
-                <img id='1' class='ostars' :src='goldenURL' />
-                <img id='2' class='ostars' :src='goldenURL' />
-                <img id='3' class='ostars' :src='goldenURL' />
-                <img id='4' class='ostars' :src='goldenURL' />
-                <img id='5' class='ostars' :src='halfURL' />
-                <span id='mark'>9分</span>
+                <img id='f1' class='ostars' :src='goldenURL' />
+                <img id='f2' class='ostars' :src='goldenURL' />
+                <img id='f3' class='ostars' :src='goldenURL' />
+                <img id='f4' class='ostars' :src='goldenURL' />
+                <img id='f5' class='ostars' :src='halfURL' />
+                <span id='markOnFilm'>{{marks}}分</span>
             </div>
 
             <div id='comment-rect'>
-                <p>{{comment}}</p>
+                <p id='comments-follow'>{{comment}}</p>
             </div>
             <div id='like-or-not'>
                 <img src='../../assets/images/cinema/like.png' @click="clike" />
@@ -30,14 +30,17 @@
 </template>
 
 <script>
-var clike_t = 0;
-var cdislike_t = 0;
+var clike_t = new Array(0,0,0,0);
+var cdislike_t = new Array(0,0,0,0);
+
 module.exports = {
     name: 'comments-onfilm',
     data () {
+        this.marks = 9;
         this.likes = 99;
         this.dislikes = 3;
         return {
+            marks: this.marks,
             likes: this.likes,
             dislikes: this.dislikes,
             comment: "全程高潮无尿点，开篇就是倒开烈火战车，僵尸车队在大街上出行时，真的很有zombie的感觉，“五车分尸”的桥段也很赞。CT扮演的大反派，颜值高气场强，但是手下的武力值太弱；JS洗白得也太容易了，他老妈的出场倒是挺出彩的；片中两次提到Brian，小伤感；小baby萌萌哒，每个镜头都敲可爱。最让我感动的镜头是潜艇爆炸时，所有人飞车前来挡在Dom身前，真的是家人才有的感情啊。最后吐槽一下基本上没什么感觉的3D特效～",
@@ -49,28 +52,55 @@ module.exports = {
     },
     methods: {
         clike: function () {
+            var gpNode = event.target.parentNode.parentNode.parentNode
+            var index = (gpNode.className)[gpNode.className.length-1]
+            console.log(index)
+
             // click LIKE, number++
-            if (clike_t == 0) {
-                this.likes += 1;
-                clike_t = 1;
+            if (clike_t[index] == 0) {
+                if (index == 0)
+                    document.getElementById('like-num').innerHTML = 1
+                else
+                    this.likes += 1
+
+                clike_t[index] = 1;
             } 
             // cancel click, number--
-            else if (clike_t == 1) {
-                this.likes -= 1;
-                clike_t = 0;
+            else if (clike_t[index] == 1) {
+                if (this.likes > 0) {
+                    if (index == 0)
+                        document.getElementById('like-num').innerHTML = 0
+                    else
+                        this.likes -= 1
+                }
+
+                clike_t[index] = 0;
             }
-                alert("?");
         },
         cdislike: function () {
+            var gpNode = event.target.parentNode.parentNode.parentNode
+            var index = (gpNode.className)[gpNode.className.length-1]
+            console.log(index)
+
             // click DISLIKE, number++
-            if (cdislike_t == 0) {
-                this.dislikes += 1;
-                cdislike_t = 1;
+            if (cdislike_t[index] == 0) {
+                if (index == 0)
+                    document.getElementById('dislike-num').innerHTML = 1
+                else
+                    this.dislikes += 1
+
+                cdislike_t[index] = 1;
             } 
             // cancel click, number--
-            else if (cdislike_t == 1) {
-                this.dislikes -= 1;
-                cdislike_t = 0;
+            else if (cdislike_t[index] == 1) {
+                if (this.dislikes > 0) {
+                    if (index == 0)
+                        document.getElementById('dislike-num').innerHTML = 0
+                    else
+                        this.dislikes -= 1
+                }
+
+                cdislike_t[index] = 0;
             }
         }
     },
@@ -90,12 +120,12 @@ module.exports = {
     height: 237px;
     float: left;
 }
-#portrait {
+#other-portrait {
     width: 60px;
     height: 60px;
     margin-top: 19px;
 }
-#portrait:hover {
+#other-portrait:hover {
     cursor: pointer;
 }
 #right-comment {
@@ -127,7 +157,7 @@ module.exports = {
     width: auto;
     cursor: pointer;
 }
-#mark {
+#markOnFilm {
     color:#f57905;
 }
 #comment-rect {

@@ -6,7 +6,7 @@
         <img id='3' class='stars' :src='grayStar' @mouseover="changeColor" @mouseleave="recover" @click="mark" />
         <img id='4' class='stars' :src='grayStar' @mouseover="changeColor" @mouseleave="recover" @click="mark" />
         <img id='5' class='stars' :src='grayStar' @mouseover="changeColor" @mouseleave="recover" @click="mark" />
-        <span>{{point}}分</span>
+        <span id='points'>{{point}}分</span>
     </div>
 </template>
 

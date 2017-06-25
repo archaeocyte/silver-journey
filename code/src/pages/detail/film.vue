@@ -112,7 +112,7 @@
 	                        <span id='word-count'>{{comments.length}}/200</span>
 	                    </div>
 	                </div>
-	                <div id='comment-button'>
+	                <div id='comment-button' @click="publish">
 	                    <span id='btn-content'>发表</span>
 	                </div>
 	            </div>
@@ -123,11 +123,11 @@
 	                <span class='title'>影评</span>
 	            </div>
 
-	            <comments-onfilm></comments-onfilm>
-	            <comments-onfilm></comments-onfilm>
-	            <comments-onfilm></comments-onfilm>
-	            <comments-onfilm></comments-onfilm>
-	            <comments-onfilm></comments-onfilm>
+
+	            <comments-onfilm class='user-comment comment0'></comments-onfilm>
+            	<comments-onfilm class='comment1'></comments-onfilm>
+            	<comments-onfilm class='comment2'></comments-onfilm>
+            	<comments-onfilm class='comment3'></comments-onfilm>
 
 	            <div id='blank233h'></div>
 	        </div>
@@ -256,6 +256,31 @@ module.exports = {
             	document.getElementById('word-count').style.color = '#f57905'
             } else {
             	document.getElementById('word-count').style.color = '#999999'
+            }
+        },
+        publish: function() {
+            if (this.comments.length <= 200) {
+                var userRate = document.getElementById('users')
+                var ratePsh = document.getElementsByClassName('user-comment')
+                console.log(ratePsh[0].id)
+                ratePsh[0].style.display = "block"
+
+                for (var i = 1; i < 6; i++) {
+                    var idxF = "f" + i      // other-comments images
+                    var idxR = i            // self-comments images
+                    //console.log(document.getElementById(idxR).src)
+                    document.getElementById(idxF).src = document.getElementById(idxR).src
+                }
+                document.getElementById('critic-name').innerHTML = "电影小天王"
+                document.getElementById('markOnFilm').innerHTML = document.getElementById('points').innerHTML
+           
+                console.log(document.getElementById('points').innerHTML)
+                document.getElementById('comments-follow').innerHTML = this.comments
+                document.getElementById('other-portrait').src = document.getElementById('portrait').src
+                document.getElementById('like-num').innerHTML = 0
+                document.getElementById('dislike-num').innerHTML = 0
+
+
             }
         }
     },
@@ -601,5 +626,10 @@ module.exports = {
 }
 #blank233h {
     height: 233px;
+}
+
+.user-comment {
+    
+    display: none;
 }
 </style>
