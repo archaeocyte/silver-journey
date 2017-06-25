@@ -30,11 +30,11 @@
             <span id='wrongConfirm' class='error'>确认密码错误</span>
         </form>
 
-        <br/>
         <div id='comment-button' @click="register">
             <span>注册</span>
         </div>
 
+        <span id='succeed'>注册成功</span>
         <br/>
         <br/>
 
@@ -63,25 +63,32 @@ module.exports = {
             
         },
         register: function  (argument) {
+            var valid = 1;
+            
             if (this.account.length < 5) {
                 document.getElementById('invalidName').style.opacity = 1;
+                valid = 0;
             } else {
                 document.getElementById('invalidName').style.opacity = 0;
             }
             if (this.password.length < 6 || this.password.length > 20) {
                 document.getElementById('invalidPsw').style.opacity = 1;
+                valid = 0;
             } else {
                 document.getElementById('invalidPsw').style.opacity = 0;
 
             }
             if (this.confirm != this.password) {
                 document.getElementById('wrongConfirm').style.opacity = 1;
+                valid = 0;
             } else {
                 document.getElementById('wrongConfirm').style.opacity = 0;
             }
 
-            // invalid account
-            
+            console.log(valid)
+            if (valid == 1) {
+                document.getElementById('succeed').style.opacity = 1;
+            }
         }
     },
     components: {
@@ -218,5 +225,14 @@ form {
     }
 }
 
+#succeed {
+    position: relative;
+    left: 220px;
+    margin: auto;
+    color: #f57905;
+    font-family:PingFangSC-Regular;
+    font-size:16px;
+    opacity: 0;
+}
 
 </style>
